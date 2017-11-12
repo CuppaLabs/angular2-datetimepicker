@@ -1,0 +1,737 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+body{
+    font-family: 'Roboto',sans-serif;
+}
+*{
+	box-sizing: border-box;
+}
+#cuppaDatePickerContainer, #cuppaDatePicker{
+	width: 250px;
+    text-align: center;
+    margin: 0px auto;
+    font-family: 'Roboto','Arial',sans-serif;
+}
+.year-dropdown{
+    text-align: center;
+}
+.calendar-header{
+    color: #8e8e8e;
+}
+.wc-date-container{
+    float: left;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #4285f4;
+    margin-bottom: 1px;
+    font-size: 16px;
+    padding: 5px;
+    text-align: left;
+    cursor: pointer;
+    background: #fff;
+    line-height: 20px;
+}
+.wc-date-container > span{
+    color: #4285f4; 
+}
+.wc-date-container > i{
+    float: right;
+    font-size: 20px;
+    color: #4285f4;
+}
+.winkel-calendar{
+    position: relative;
+    font-family: 'Roboto','Arial',sans-serif;
+}
+.wc-date-popover{
+    font-size: 14px;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);    margin: 0px auto;
+    perspective: 1000px;
+    float: left;
+    background: #fff;
+    border: 1px solid #4285f4;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    overflow: hidden;
+    height: 100%;
+}
+.wc-banner{
+    /* background: #3ce5ed; */
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 54px;
+    /*background: #4285f4;*/
+}
+.wc-day-row{
+    padding: 5px 0px;
+    /*background: rgba(0, 0, 0, 0.09);*/
+    color: #4285f4;
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    text-align: center;
+}
+.wc-date-row{
+    display: inline-block;
+    font-size: 82px;
+    color: #4285f4;
+    padding: 5px;
+    width: 50%;
+    float: left;
+    text-align: right;
+    font-weight: 200;  
+}
+.wc-month-row{
+	padding: 25px 0px 0px 0px;
+    font-size: 35px;
+    color: #8e8e8e;
+    width: 100%;
+    float: left;
+}
+.wc-month-row > div, .wc-year-row > div{
+    
+}
+.wc-month-row > i, .wc-year-row > i{
+    float: right;
+    font-size: 12px;
+    padding: 10px 6px;
+    cursor: pointer;
+}
+.wc-month-row > i:hover, .wc-year-row > i:hover{
+    color: rgba(255, 255, 255, 0.63);
+}
+.wc-year-row{
+	text-align: left;
+    color: #8e8e8e;
+    font-size: 24px;
+    float: left;
+    width: 100%;
+    padding: 5px 0px 0px 0px;
+}
+.timepicker-true .wc-year-row{
+    font-size: 20px;
+    padding: 5px 0px 0px 12px;
+}
+.timestate > .active{
+    color: #fff;
+}
+.timestate span{
+    cursor:pointer;
+}
+.wc-my-sec{
+	display: inline-block;
+	padding: 5px 10px;
+	float: left;
+    width: 50%;
+    font-weight: 300;
+}
+.timepicker-true .wc-my-sec{
+    width: 20%;
+}
+.time i{
+    font-size: 21px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+.time i:hover{
+    color: rgba(255, 255, 255, 0.65);
+}
+.time > .hour, .time > .minutes{
+    float: left;
+    width: 48%;
+    text-align: center;
+}
+.wc-month-row > div:nth-child(1), .wc-year-row > div:nth-child(1){
+	float: left;
+    text-align: left;
+}
+.wc-time-sec{
+    color: #4285f4;
+    text-align: center;
+    padding: 0px 10px 10px;
+    float: left;
+    width: 100%;
+}
+.wc-time-sec > .time{
+    font-size: 38px;
+    font-weight: 300;
+    width: 100%;
+    text-align: center;
+    float: left;
+}
+.time-divider{
+    width: 4%;
+    float: left;
+    text-align: center;
+    padding: 0px 10px;
+}
+.time-view{
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    z-index: 1;
+    top: 40px;
+    padding: 35px;
+    border-top: 1px solid #4285f4;
+}
+.time-view-btn {
+    text-align: center;
+}
+.meridian{
+    text-align: center;
+    padding: 15px 0px;
+}
+.button{
+    width: 100%;
+    padding: 10px;
+    background: #4285f4;
+    color: #fff;
+    margin: 0px auto;
+    border: 1px solid #4285f4;
+    border-radius: 3px;
+}
+.button-sm{
+    width: 50%;
+}
+.time-view .time{
+    font-size: 36px;
+    width: 100%;
+    margin: 0px auto;
+    display: inline-block;
+    padding: 5px 0px 0px 0px;
+    color: #4285f4;
+    font-weight: 300;
+}
+.time-view .time-divider{
+    padding: 16px 0;
+}
+.wc-time-sec .time input, .time-view .time input {
+    display: inline-block;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: center;   
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 32px;
+    font-weight: 300;
+    padding: 0px 10px;
+    text-align: center;
+    color: #4285f4;
+}
+.inc-btn, .dec-btn {
+    font-size: 14px;
+    display: block;
+    color: #8e8e8e;
+}
+.wc-time-sec > .time > .timestate{
+    float: left;
+    padding: 0px 10px;
+}
+.show-time-picker .wc-date-row{
+     width: 33% !important;       
+}
+.show-time-picker .wc-my-sec{
+    width: 22% !important;     
+}
+
+.wc-month-controls > .fa:hover, .wc-year-controls > .fa:hover{
+	color: #fff;
+}
+.wc-details > .fa:hover{
+    color: #ccc;
+}
+.wc-month-controls{
+    padding: 5px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.71);
+    float: right;
+}
+.wc-year-controls{
+	padding: 2px 5px 0px 5px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.71);
+    float: right;
+}
+.wc-year-controls > .fa , .wc-month-controls > .fa{
+    cursor: pointer;
+    padding: 0px 4px;
+}
+
+.wc-details{
+    float: left;
+    width: 65%;
+    padding: 10px 0px 10px;	
+    color: #fff;
+    background: #4a8cf9;
+}
+.banner-true > .wc-details{
+    padding: 10px 0px 10px;	
+}
+.wc-prev{
+	float: left;
+	width:25%;
+    text-align: left;
+    padding: 0px 15px;
+    cursor: pointer;
+    font-size: 35px;
+}
+.month-year{
+	float: left;
+	width:50%;
+    font-size: 18px;
+    line-height: 35px;
+    text-align: center;
+}
+.wc-next{
+	float: right;
+	width:25%;
+    text-align: right;
+    padding: 0px 15px;
+    cursor: pointer;
+    font-size: 35px;
+}
+.calendar-days{
+	color: #07c;
+    background: #fff;
+}
+.cal-util{
+    width: 100%;
+    float: left;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+}
+.cal-util > .ok{
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #d1d1d1;
+    float: left;
+    color: #4285f4;
+    font-size: 18px;
+    border-top: 1px solid #d1d1d1;
+    text-align: center;
+}
+.ok > i{
+    margin-right: 5px;
+}
+.cal-util > .cancel{
+    width: 50%;
+    float: left;
+    padding: 10px;
+    color: #4285f4;
+    font-size: 20px;
+}
+.cal-util > .ok:hover, .cal-util > .cancel:hover{
+    box-shadow: inset 0px 0px 20px #ccc;
+}
+.today > span{
+	border: 1px solid #4285f4;
+    background: none;
+}
+.selected-day > span{
+	/*background: #3ce5ed;*/
+    background: #4285f4;
+    color: #fff;
+}
+.calendar-header{
+    
+}
+
+.calendar-days td{
+	cursor: pointer;
+}
+.calendar-day:hover > span{
+	background: #4285f4;
+    color: #fff;
+}
+.winkel-calendar table{
+	width: 100%;
+	text-align: center;
+    font-size: 18px;
+    border-collapse: collapse;
+}
+.winkel-calendar table td{
+	padding: 0px 0px;
+    width: calc((100%)/7);
+	text-align: center;
+	transition: all .1s linear;
+}
+.winkel-calendar table td span{
+    display: block;
+    padding: 7px;
+    margin: 0px;
+    line-height: 32px;
+}
+.calendar-header td{
+    padding: 5px 0px !important;
+}
+.months-view, .years-view{
+    background: #fff;
+    width: 100%;
+    top: 210px;
+    width: 100%;
+    height: calc(100% - 210px);
+    bottom: 0;
+    text-align: center;
+    
+}
+.years-list-view{
+   float: left;
+   width: calc(100% - 60px);
+   height: 100%;
+}
+.months-view > span, .years-list-view > span{
+    display: inline-block;
+    width: 25%;
+    padding: 25px 0px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.years-list-view > span{
+    width: 33.3333%
+}
+.years-view > .prev, .years-view > .next{
+    float: left;
+    width: 30px;
+    padding: 85px 0px;
+    cursor: pointer;
+    font-size: 52px;
+}
+.years-view > .prev:hover, .years-view > .next:hover{
+    color: #ccc;
+}
+.years-view > .next{
+    float: right;
+}
+.current-month, .current-year{
+    color: #4285f4;
+}
+.years-view > span{
+    width: 33.3333%;
+}
+.months-view > span:hover, .years-list-view > span:hover{
+    color: #4285f4;
+}
+.banner-true{
+    padding-top: 0px !important;
+}
+.banner-true > .wc-banner{
+    margin-bottom : 0px !important;
+}
+.banner-true > .time-view{
+    height: calc(100% - 124px);
+    top: 142px;
+}
+.methods{
+    clear: left;
+    padding: 50px 0px;
+    text-align: center;
+}
+.month-year i{
+    cursor:pointer;
+    font-size: 10px;
+}
+
+    .timepicker-true .wc-month-row{
+        font-size: 28px;
+        padding: 5px 0px 5px 15px;
+    }
+    .timepicker-true .wc-month-row > div:nth-child(1), .wc-year-row > div:nth-child(1){
+    }
+    .timepicker-true .wc-month-row > i, .wc-year-row > i{
+        padding: 8px 6px;
+    }
+    .timepicker-true .wc-my-sec{
+        padding: 16px 2px;
+    }
+    .timepicker-true .wc-time-sec{
+        width: 48%;
+        padding: 25px 0px;
+        margin: 0px;
+        cursor: pointer;
+    }
+    .timepicker-true .wc-time-sec:hover{
+        color: rgba(255, 255, 255, 0.65);
+    }
+    .timepicker-true .wc-time-sec > .time{
+        width: 75%;
+        cursor: pointer;
+    }
+    .timepicker-true .time i{
+        display: none;
+    }
+    .timepicker-true .time-divider{
+        padding: 0px;
+    }
+    .timepicker-true .timestate{
+        padding: 0px;
+        width: auto;
+        padding-top: 7px;
+        font-size: 20px;
+        font-weight: 300;
+    }
+.year-title{
+    width: 35%;
+    float: left;
+    line-height: 55px;
+    font-size: 18px;
+    background: #2f77f0;
+    color: #fff;
+}
+.year-title i{
+    float: right;
+    padding: 13px 10px 7px 0px;
+    font-size: 28px;
+}
+
+@media (min-width: 365px) and (max-width: 767px){
+    .wc-date-row{
+        font-size: 96px;
+    }
+    .timepicker-true .wc-date-row {
+        width: 54%;
+        padding: 20px 5px 10px;
+    }
+    .timepicker-true .wc-my-sec {
+        padding: 33px 2px 10px;
+        width: 46%;
+    }
+    .timepicker-true .wc-time-sec {
+        width: 100%;
+        padding: 0px 0px 15px 0px;
+    }
+    .timepicker-true .wc-time-sec > .time {
+        width: 35%;
+        float: none;
+        margin: 0px auto;
+        font-size: 42px;
+    }
+    .timepicker-true .wc-month-row {
+        font-size: 42px;
+        padding: 5px 0px 5px 5px;
+    }
+    .timepicker-true .wc-year-row {
+        font-size: 24px;
+        padding: 15px 0px 0px 5px;
+    }
+    .timepicker-true .timestate{
+        font-size: 22px;
+        font-weight: 100;
+    }
+    .months-view, .years-view{
+        top: 297px;
+    }
+    .banner-true > .time-view{
+        top: 240px;
+    }
+    .time-view .time{
+        font-size: 62px;      
+    }
+    .cuppa-btn-group{
+        font-size: 22px;
+        font-weight: 300;
+    }
+    .angular-range-slider{
+        height: 5px;
+        margin: 20px auto 25px auto;
+    }
+    .angular-range-slider div.handle{
+        width: 45px;
+        height: 45px;
+        top: -20px;
+        font-size: 26px;
+    }
+    .time-view-btn{
+        padding: 25px 0px;
+    }
+    .button-sm {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .cuppa-btn-group > .button{
+        padding: 5px 15px !important;
+    }
+
+}
+@media (min-width: 768px) {
+    .wc-date-popover{
+        width: 250px;
+        position: absolute;
+        top: 31px;
+        height: auto;
+        left: 0;
+        border: 1px solid #4285f4;
+    }
+    .wc-day-row{
+        padding: 5px 0px;
+        font-size: 0.25em;
+    }
+    .wc-date-row{
+        font-size: 1em;
+        padding: 5px;
+    }
+    .wc-my-sec{
+        padding: 5px 0px;
+    }
+    .timepicker-true .wc-my-sec{
+        padding: 15px 3px;
+    }
+    .wc-month-row{
+        padding: 10px 0px 0px 0px;
+        font-size: 0.4em;
+    }
+    .wc-year-row{
+        font-size: 0.3em;
+        padding: 0px;
+    }
+    .month-year{
+        font-size: 14px;
+        line-height: 20px;
+        cursor: pointer;
+    }
+    .wc-month-row > div:nth-child(1), .wc-year-row > div:nth-child(1){
+    }
+    .wc-prev, .wc-next{
+        font-size: 18px;
+    }
+    .wc-details{
+        padding: 10px 0px 10px;
+    }
+    .year-title{
+        line-height: 40px;
+        font-size: 16px;
+    }
+    .year-title i{
+        padding: 11px 10px 10px 0px;
+        font-size: 18px;
+    }
+    .calendar-header td{
+        padding: 5px 0px !important;
+    }
+    .winkel-calendar table{
+        font-size: 14px;
+    }
+    .winkel-calendar table td span{
+        line-height: 24px;
+        width: 35px;
+        height: 35px;
+    }
+    .months-view, .years-view{
+        top: 40px;
+        width: 100%;
+        height: calc(100%);
+    }
+    .banner-true .months-view, .banner-true .years-view{
+        top: 165px;
+        height: calc(100% - 128px);
+    }
+    .winkel-calendar table td span{
+            padding: 6px;
+    }
+    .cal-util > .ok{
+        font-size: 14px;
+        padding: 10px;
+    }
+    .wc-time-sec > .time{
+        font-size: 0.35em;
+    }
+    .time i{
+        font-size: 10px;
+    }
+    .wc-time-sec > .timestate{
+        font-size: 16px;
+    }
+    .wc-month-row > div:nth-child(1), .wc-year-row > div:nth-child(1){
+        min-width: 35px;
+    }
+    .wc-month-row > i, .wc-year-row > i{
+        font-size: 8px;
+    }
+    .cal-util{
+        position: relative;
+    }
+    .banner-true > .time-view {
+        top: 159px;
+    }
+    .timepicker-true .wc-month-row {
+        padding: 6px 0px 0px 0px;
+        font-size: 18px;
+    }
+    .timepicker-true .wc-year-row {
+        padding: 0px 0px 0px 0px;
+        font-size: 16px;
+    }
+}
+.time-view h5{
+    text-align: left;
+    width: 80%;
+    margin: 0px auto;
+    padding: 5px 0px;
+    font-weight: 400;
+}
+
+.cuppa-btn-group{
+    display: inline-flex;
+}
+.cuppa-btn-group > .active{
+    background: #4285f4 !important;
+    color: #fff !important;
+}
+.cuppa-btn-group > .button{
+    border: 1px solid #4285f4;
+    background: #fff;
+    border-radius: 3px;
+    float: left;
+    margin: 0px;
+    align-items: initial;
+    color: #4285f4;
+    width: auto;
+    padding: 5px 10px;
+}
+.cuppa-btn-group > .button:first-child{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-right: 0px;
+}
+.cuppa-btn-group > .button:last-child{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+/* Slider CSS*/
+
+.slider{
+    width: 200px;
+    height: 5px;
+    background: #ccc;
+    border-radius: 5px;
+    margin: 12px auto;
+    position: relative;
+} 
+.slider > .circle{
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    position: absolute;
+    top: -8px;
+    border-radius: 20px;
+    left: 60px;
+    box-shadow: 0px 0px 5px #ccc;
+    cursor: pointer;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

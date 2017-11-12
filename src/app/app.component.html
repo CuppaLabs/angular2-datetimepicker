@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-md fixed-top ">
+      <a class="navbar-brand" href="https://cuppalabs.github.io">
+          <img src="../assets/images/cuppa-logo-coffee11.png" height="32" alt="">
+      </a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link component-title" href="#">Angular 2 Datepicker</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm" href="https://github.com/CuppaLabs/angular2-datetimeepicker">Github</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm" href="https://cuppalabs.github.io/components/datepicker/">Documentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm" href="https://cuppalabs.github.io/components/datepicker/">Back to Article</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        
+        <nav class="col-sm-2 col-md-2 d-none d-sm-block sidebar">
+            <h5 class="sidebar-title">Examples</h5>
+            <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/datepicker" routerLinkActive="active">Date picker</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/datetimepicker" routerLinkActive="active">Date Time picker</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/simpledatepicker" routerLinkActive="active">Simple</a>
+            </li>
+            </ul>
+        </nav>
+
+        <main class="col-sm-7 ml-sm-auto mr-sm-auto col-md-7 pt-3 center-content" role="main">
+            <div class="row">
+</div>
+          <section class="row text-center placeholders"></section>
+          <section class="row text-center placeholders">
+            <div class="col-6 col-sm-6 ml-md-auto mr-md-auto placeholder">
+                <div style="width: 200px; margin: 0px auto;"> 
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+          </section>
+        </main>
+        <div class="col sidebar ad-sidebar">
+            <google-adsense [settings]="adSettings" style="display:block;width:300px;height:250px;"></google-adsense>
+            <google-adsense [settings]="ad2settings" style="display:block;width:300px;height:250px;"></google-adsense>
+        </div>
+      </div>
+    </div>
