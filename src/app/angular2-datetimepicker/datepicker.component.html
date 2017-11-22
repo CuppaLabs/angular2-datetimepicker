@@ -38,7 +38,7 @@
             <i class="wc-next fa fa-angle-right" (click)="nextMonth($event)"></i>
         </div>
         <div class="year-title">
-            <div class="year-dropdown" (click)="generateYearList()">
+            <div class="year-dropdown" (click)="generateYearList('current')">
                 {{date | date: 'yyyy'}}
                 <i *ngIf="!yearView" class="fa fa-angle-down"></i>
                 <i *ngIf="yearView" class="fa fa-angle-up"></i>
