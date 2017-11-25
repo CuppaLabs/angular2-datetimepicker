@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+
+$base-color: #1565c0;
+$secondary-color: #ffffff;
+
 body{
     font-family: 'Roboto',sans-serif;
 }
@@ -15,13 +19,14 @@ body{
     text-align: center;
 }
 .calendar-header{
-    color: #8e8e8e;
+    color: #333;
+    background: #fff;
 }
 .wc-date-container{
     float: left;
     width: 100%;
     height: 30px;
-    border: 1px solid #4285f4;
+    border: 1px solid $base-color;
     margin-bottom: 1px;
     font-size: 16px;
     padding: 5px;
@@ -31,12 +36,12 @@ body{
     line-height: 20px;
 }
 .wc-date-container > span{
-    color: #4285f4; 
+    color: $base-color; 
 }
 .wc-date-container > i{
     float: right;
     font-size: 20px;
-    color: #4285f4;
+    color: $base-color;
 }
 .winkel-calendar{
     position: relative;
@@ -48,14 +53,17 @@ body{
     perspective: 1000px;
     float: left;
     background: #fff;
-    border: 1px solid #4285f4;
+    background: $secondary-color;
     position: fixed;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    z-index: 9999;
+    width: 90%;
+    top: 5%;
+    left: 50%;
+    z-index: 9999999;
     overflow: hidden;
-    height: 100%;
+    height: 90%;
+    max-width: 320px;
+    transition: all .5s linear;
+    transform: translateX(-50%);
 }
 .wc-banner{
     /* background: #3ce5ed; */
@@ -63,21 +71,21 @@ body{
     width: 100%;
     margin-bottom: 5px;
     font-size: 54px;
-    /*background: #4285f4;*/
+    background: $base-color;
 }
 .wc-day-row{
     padding: 5px 0px;
     /*background: rgba(0, 0, 0, 0.09);*/
-    color: #4285f4;
+    color: $secondary-color;
     width: 100%;
     float: left;
-    font-size: 18px;
+    font-size: 3vh;
     text-align: center;
 }
 .wc-date-row{
     display: inline-block;
-    font-size: 82px;
-    color: #4285f4;
+    font-size: 25vw;
+    color: $secondary-color;
     padding: 5px;
     width: 50%;
     float: left;
@@ -86,8 +94,8 @@ body{
 }
 .wc-month-row{
 	padding: 25px 0px 0px 0px;
-    font-size: 35px;
-    color: #8e8e8e;
+    font-size: 8vw;
+    color: $secondary-color;
     width: 100%;
     float: left;
 }
@@ -105,11 +113,11 @@ body{
 }
 .wc-year-row{
 	text-align: left;
-    color: #8e8e8e;
-    font-size: 24px;
+    color: $secondary-color;
+    font-size: 7vw;
     float: left;
     width: 100%;
-    padding: 5px 0px 0px 0px;
+    padding: 2px 0px 0px 0px;
 }
 .timepicker-true .wc-year-row{
     font-size: 20px;
@@ -150,7 +158,7 @@ body{
     text-align: left;
 }
 .wc-time-sec{
-    color: #4285f4;
+    color: $base-color;
     text-align: center;
     padding: 0px 10px 10px;
     float: left;
@@ -176,7 +184,7 @@ body{
     z-index: 1;
     top: 40px;
     padding: 35px;
-    border-top: 1px solid #4285f4;
+    border-top: 1px solid $base-color;
 }
 .time-view-btn {
     text-align: center;
@@ -188,10 +196,10 @@ body{
 .button{
     width: 100%;
     padding: 10px;
-    background: #4285f4;
+    background: $base-color;
     color: #fff;
     margin: 0px auto;
-    border: 1px solid #4285f4;
+    border: 1px solid $base-color;
     border-radius: 3px;
 }
 .button-sm{
@@ -203,7 +211,7 @@ body{
     margin: 0px auto;
     display: inline-block;
     padding: 5px 0px 0px 0px;
-    color: #4285f4;
+    color: $base-color;
     font-weight: 300;
 }
 .time-view .time-divider{
@@ -221,7 +229,7 @@ body{
     font-weight: 300;
     padding: 0px 10px;
     text-align: center;
-    color: #4285f4;
+    color: $base-color;
 }
 .inc-btn, .dec-btn {
     font-size: 14px;
@@ -266,8 +274,8 @@ body{
     float: left;
     width: 65%;
     padding: 10px 0px 10px;	
-    color: #fff;
-    background: #4a8cf9;
+    color: $secondary-color;
+    background: $base-color;
 }
 .banner-true > .wc-details{
     padding: 10px 0px 10px;	
@@ -312,7 +320,7 @@ body{
     padding: 15px;
     border-bottom: 1px solid #d1d1d1;
     float: left;
-    color: #4285f4;
+    color: $base-color;
     font-size: 18px;
     border-top: 1px solid #d1d1d1;
     text-align: center;
@@ -324,19 +332,19 @@ body{
     width: 50%;
     float: left;
     padding: 10px;
-    color: #4285f4;
+    color: $base-color;
     font-size: 20px;
 }
 .cal-util > .ok:hover, .cal-util > .cancel:hover{
     box-shadow: inset 0px 0px 20px #ccc;
 }
 .today > span{
-	border: 1px solid #4285f4;
+	border: 1px solid $base-color;
     background: none;
 }
 .selected-day > span{
 	/*background: #3ce5ed;*/
-    background: #4285f4;
+    background: $base-color;
     color: #fff;
 }
 .calendar-header{
@@ -347,7 +355,7 @@ body{
 	cursor: pointer;
 }
 .calendar-day:hover > span{
-	background: #4285f4;
+	background: $base-color;
     color: #fff;
 }
 .winkel-calendar table{
@@ -410,13 +418,13 @@ body{
     float: right;
 }
 .current-month, .current-year{
-    color: #4285f4;
+    color: $base-color;
 }
 .years-view > span{
     width: 33.3333%;
 }
 .months-view > span:hover, .years-list-view > span:hover{
-    color: #4285f4;
+    color: $base-color;
 }
 .banner-true{
     padding-top: 0px !important;
@@ -481,8 +489,8 @@ body{
     float: left;
     line-height: 55px;
     font-size: 18px;
-    background: #2f77f0;
-    color: #fff;
+    color: $secondary-color;
+    background: $base-color;
 }
 .year-title i{
     float: right;
@@ -492,7 +500,6 @@ body{
 
 @media (min-width: 365px) and (max-width: 767px){
     .wc-date-row{
-        font-size: 96px;
     }
     .timepicker-true .wc-date-row {
         width: 54%;
@@ -567,7 +574,7 @@ body{
         top: 31px;
         height: auto;
         left: 0;
-        border: 1px solid #4285f4;
+        transform: translateX(0);
     }
     .wc-day-row{
         padding: 5px 0px;
@@ -681,17 +688,17 @@ body{
     display: inline-flex;
 }
 .cuppa-btn-group > .active{
-    background: #4285f4 !important;
+    background: $base-color !important;
     color: #fff !important;
 }
 .cuppa-btn-group > .button{
-    border: 1px solid #4285f4;
+    border: 1px solid $base-color;
     background: #fff;
     border-radius: 3px;
     float: left;
     margin: 0px;
     align-items: initial;
-    color: #4285f4;
+    color: $base-color;
     width: auto;
     padding: 5px 10px;
 }
