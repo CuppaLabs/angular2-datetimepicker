@@ -1,86 +1,14 @@
-/*
- * Base structure
- */
-
-/* Move down content because we have a fixed navbar that is 3.5rem tall */
-
-
-/*
- * Typography
- */
-
-h1 {
-  margin-bottom: 20px;
-  padding-bottom: 9px;
-  border-bottom: 1px solid #eee;
+.left-sidebar, .right-sidebar {
+    width: 330px;
+    max-width: 330px;
+    min-width: 330px;
 }
-
-/*
- * Sidebar
- */
-
-.sidebar {
-  position: sticky;
-  top: 61px;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  padding: 10px;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  border-right: 1px solid #eee;
-  background: #fff;
-  height: calc(100vh - 61px);
+.outer-wrapper {
+    padding: 30px;
 }
-
-/* Sidebar navigation */
-.sidebar {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.sidebar .nav {
-  margin-bottom: 20px;
-  border-top: 1px solid #ccc;
-}
-
-.sidebar .nav-item {
-  width: 100%;
-}
-
-.sidebar .nav-item + .nav-item {
-  margin-left: 0;
-}
-
-.sidebar .nav-link {
-  border-radius: 0;
-}
-.sidebar .nav-link.active{
-    background: #007bff;
-    color: #fff !important;
-}
-
 .center-content{
-    min-height: 1200px;
-}
-/*
- * Dashboard
- */
-
- /* Placeholders */
-.placeholders {
-  padding-bottom: 3rem;
-}
-
-.placeholder img {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-.sidebar-title{
-    padding: 0.25rem 1rem;
-}
-.sidebar .nav-link{
-    padding: .25rem 1rem !important;
-    color: rgba(0, 0, 0, 0.85);
-    font-weight: 500;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 3px;
+    padding: 15px;
 }

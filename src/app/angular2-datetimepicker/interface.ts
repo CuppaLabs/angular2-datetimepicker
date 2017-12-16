@@ -8,4 +8,5 @@ export interface Settings{
     cal_months_labels: Array<string>;
     cal_months_labels_short: Array<string>;
     closeOnSelect?: boolean;
+    rangepicker?: boolean;
 }

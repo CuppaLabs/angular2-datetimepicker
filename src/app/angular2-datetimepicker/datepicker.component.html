@@ -1,36 +1,252 @@
-<div class="winkel-calendar">
+<div class="winkel-calendar" (clickOutside)="closepopover()">
+    <span *ngIf="!settings.rangepicker">
     <input type="hidden" class="wc-input" value="{{date}}">
     <div class="wc-date-container" (click)="popover = !popover">
         <span>{{date | date: settings.format}}</span>
-        <i class="fa fa-calendar"></i>
-    </div>
-    <div class="wc-date-popover" [ngClass]="{'banner-true': settings.bigBanner == true}" [hidden]="!popover">
-        <div class="wc-banner" *ngIf="settings.bigBanner">
-            <div class="wc-day-row">{{date | date: 'EEEE'}}</div>
-            <div class="wc-date-row">{{date | date: 'dd'}}</div>
-            <div class="wc-my-sec">
-                <div class="wc-month-row">
-                    <div>{{date | date: 'MMMM'}}</div>
-                </div>
-                <div class="wc-year-row">
-                    <div>{{date | date: 'yyyy'}}</div>
-                </div>
+    <i class="fa fa-calendar"></i>
+</div>
+</span>
+<div *ngIf="!settings.rangepicker" class="wc-date-popover" [ngClass]="{'banner-true': settings.bigBanner == true}" [hidden]="!popover">
+    <div class="wc-banner" *ngIf="settings.bigBanner">
+        <div class="wc-day-row">{{date | date: 'EEEE'}}</div>
+        <div class="wc-date-row">{{date | date: 'dd'}}</div>
+        <div class="wc-my-sec">
+            <div class="wc-month-row">
+                <div>{{date | date: 'MMMM'}}</div>
             </div>
-            <div class="wc-time-sec ng-scope" ng-click="toggleTimeView()">
-                                <div *ngIf="settings.timePicker" class="time" (click)="timeView = !timeView">
-                                    {{date | date: 'hh'}} : {{date | date: 'mm'}} {{date | date: 'a'}} <span class="fa fa-clock-o"></span>
-                                </div>
-                            </div>
+            <div class="wc-year-row">
+                <div>{{date | date: 'yyyy'}}</div>
+            </div>
+        </div>
+        <div class="wc-time-sec ng-scope" ng-click="toggleTimeView()">
+            <div *ngIf="settings.timePicker" class="time" (click)="timeView = !timeView">
+                {{date | date: 'hh'}} : {{date | date: 'mm'}} {{date | date: 'a'}} <span class="fa fa-clock-o"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="wc-details">
+        <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
+        <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{date | date: 'MMMM'}}
+            <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
+                                 <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->
+        </div>
+        <div class="month-year" *ngIf="!settings.bigBanner" (click)="toggleMonthView()">
+            {{date | date: 'MMMM'}}
+            <!--    <i ng-show="!monthsView" class="fa fa-arrow-down" (click)="toggleMonthView()"></i>
+                                    <i ng-show="monthsView" class="fa fa-arrow-up" (click)="toggleMonthView()"></i>  -->
 
         </div>
+        <i class="wc-next fa fa-angle-right" (click)="nextMonth($event)"></i>
+    </div>
+    <div class="year-title">
+        <div class="year-dropdown" (click)="generateYearList('current')">
+            {{date | date: 'yyyy'}}
+            <i *ngIf="!yearView" class="fa fa-angle-down"></i>
+            <i *ngIf="yearView" class="fa fa-angle-up"></i>
+        </div>
+    </div>
+    <table class="calendar-header" [hidden]="yearView == true || monthsView == true">
+        <tr>
+            <td class="calendar-header-day">Su</td>
+            <td class="calendar-header-day">Mo</td>
+            <td class="calendar-header-day">Tu</td>
+            <td class="calendar-header-day">We</td>
+            <td class="calendar-header-day">Th</td>
+            <td class="calendar-header-day">Fr</td>
+            <td class="calendar-header-day">Sa</td>
+        </tr>
+    </table>
+    <div class="months-view" [hidden]="!monthsView" (click)="setMonth($event)">
+        <span *ngFor="let month of settings.cal_months_labels_short" [ngClass]="{'current-month': month == settings.cal_months_labels_short[date?.getMonth()]}"
+            id="{{month}}">{{month}}</span>
+    </div>
+    <div class="years-view" *ngIf="yearView">
+        <div class="fa fa-angle-left prev" (click)="generateYearList('prev')"></div>
+        <div class="fa fa-angle-right next" (click)="generateYearList('next')"></div>
+        <div class="years-list-view" (click)="setYear($event)">
+            <span *ngFor="let year of yearsList" [ngClass]="{'current-year': year == date?.getFullYear()}" id="{{year}}">{{year}}</span>
+        </div>
+    </div>
+    <div class="time-view" [hidden]="!timeView">
+        <div class="time">
+            <div class="hour">
+                <span class="fa fa-plus inc-btn" (click)="incHour()"></span>
+                <input type="number" value="{{hourValue}}" [(ngModel)]="hourValue" autofocus/>
+                <span class="fa fa-minus dec-btn" (click)="decHour()"></span>
+            </div>
+            <div class="time-divider">:</div>
+            <div class="minutes">
+                <span class="fa fa-plus inc-btn" (click)="incMinutes()"></span>
+                <input type="number" value="{{minValue}}" [(ngModel)]="minValue" />
+                <span class="fa fa-minus dec-btn" (click)="decMinutes()"></span>
+            </div>
+        </div>
+        <div class="meridian">
+            <div class="cuppa-btn-group">
+                <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
+                <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
+            </div>
+        </div>
+        <div class="time-view-btn">
+            <button class="button" (click)="setTimeView()">Set Time</button>
+        </div>
+    </div>
+    <table class="calendar-days" (click)="setDay($event);" [hidden]="monthsView || yearView">
+        <tr *ngFor="let week of monthDays">
+            <td [ngClass]="{'calendar-day': day != null,'today': day == today.getDate() && date?.getMonth() == today.getMonth() && date?.getFullYear() == today.getFullYear(),'selected-day': day == date?.getDate()}"
+                *ngFor="let day of week">
+                <span>{{day}}</span>
+            </td>
+
+        </tr>
+    </table>
+    <div class="cal-util">
+        <div class="ok" (click)="done()"><i class="fa fa-check"></i>Done
+        </div>
+    </div>
+</div>
+<span *ngIf="settings.rangepicker">
+        <input type="hidden" class="wc-input" value="{{date}}">
+<div class="range-input">
+        <div class="wc-date-container" (click)="popover = !popover">
+            <span>{{dateRange?.startDate | date: settings.format}}</span>
+<i class="fa fa-arrow-circle-o-right range-direc"></i>
+</div>
+<div class="wc-date-container to-input" (click)="popover = !popover">
+    <span>{{dateRange?.endDate | date: settings.format}}</span>
+    <i class="fa fa-calendar"></i>
+</div>
+</div>
+</span>
+<div *ngIf="settings.rangepicker" class="range-date-popover" [ngClass]="{'banner-true': settings.bigBanner == true}" [hidden]="!popover">
+    <div class="range-banner">
+        <div class="wc-banner-col" *ngIf="settings.bigBanner">
+            <label>FROM</label>
+            <div class="wc-day">
+                {{dateRange.startDate | date: 'dd'}}
+            </div>
+            <div class="wc-my">
+                <div class="wc-month">
+                    <div>
+                        {{dateRange.startDate | date: 'MMMM'}} {{dateRange.startDate | date: 'yyyy'}}
+                    </div>
+                </div>
+                <div class="wc-year">
+                    <span>{{dateRange.startDate | date: 'EEEE'}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="wc-banner-col arrow-right" *ngIf="settings.bigBanner">
+            <i class="fa fa-angle-right"></i>
+        </div>
+        <div class="wc-banner-col" *ngIf="settings.bigBanner">
+            <label>TO</label>
+            <div class="wc-day">{{dateRange.endDate | date: 'dd'}}</div>
+            <div class="wc-my">
+                <div class="wc-month">
+                    <div>
+                        {{dateRange.endDate | date: 'MMMM'}} {{dateRange.endDate | date: 'yyyy'}}
+                    </div>
+                </div>
+                <div class="wc-year">
+                    <span>{{dateRange.endDate | date: 'EEEE'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dp-left-section">
         <div class="wc-details">
             <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
-            <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{date | date: 'MMMM'}}
+            <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{dateRange.startDate | date: 'MMMM'}}
                 <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
                                  <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->
             </div>
             <div class="month-year" *ngIf="!settings.bigBanner" (click)="toggleMonthView()">
-                {{date | date: 'MMMM'}}
+                {{dateRange.startDate | date: 'MMMM'}}
+                <!--    <i ng-show="!monthsView" class="fa fa-arrow-down" (click)="toggleMonthView()"></i>
+                                    <i ng-show="monthsView" class="fa fa-arrow-up" (click)="toggleMonthView()"></i>  -->
+
+            </div>
+            <i class="wc-next fa fa-angle-right" (click)="nextMonth($event)"></i>
+        </div>
+        <div class="year-title">
+            <div class="year-dropdown" (click)="generateYearList('current')">
+                {{dateRange.startDate | date: 'yyyy'}}
+                <i *ngIf="!yearView" class="fa fa-angle-down"></i>
+                <i *ngIf="yearView" class="fa fa-angle-up"></i>
+            </div>
+        </div>
+        <table class="calendar-header" [hidden]="yearView == true || monthsView == true">
+            <tr>
+                <td class="calendar-header-day">Su</td>
+                <td class="calendar-header-day">Mo</td>
+                <td class="calendar-header-day">Tu</td>
+                <td class="calendar-header-day">We</td>
+                <td class="calendar-header-day">Th</td>
+                <td class="calendar-header-day">Fr</td>
+                <td class="calendar-header-day">Sa</td>
+            </tr>
+        </table>
+        <div class="months-view" [hidden]="!monthsView" (click)="setMonth($event)">
+            <span *ngFor="let month of settings.cal_months_labels_short" [ngClass]="{'current-month': month == settings.cal_months_labels_short[dateRange.startDate?.getMonth()]}"
+                id="{{month}}">{{month}}</span>
+        </div>
+        <div class="years-view" *ngIf="yearView">
+            <div class="fa fa-angle-left prev" (click)="generateYearList('prev')"></div>
+            <div class="fa fa-angle-right next" (click)="generateYearList('next')"></div>
+            <div class="years-list-view" (click)="setYear($event)">
+                <span *ngFor="let year of yearsList" [ngClass]="{'current-year': year == dateRange.startDate?.getFullYear()}" id="{{year}}">{{year}}</span>
+            </div>
+        </div>
+        <div class="time-view" [hidden]="!timeView">
+            <div class="time">
+                <div class="hour">
+                    <span class="fa fa-plus inc-btn" (click)="incHour()"></span>
+                    <input type="number" value="{{hourValue}}" [(ngModel)]="hourValue" autofocus/>
+                    <span class="fa fa-minus dec-btn" (click)="decHour()"></span>
+                </div>
+                <div class="time-divider">:</div>
+                <div class="minutes">
+                    <span class="fa fa-plus inc-btn" (click)="incMinutes()"></span>
+                    <input type="number" value="{{minValue}}" [(ngModel)]="minValue" />
+                    <span class="fa fa-minus dec-btn" (click)="decMinutes()"></span>
+                </div>
+            </div>
+            <div class="meridian">
+                <div class="cuppa-btn-group">
+                    <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
+                    <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
+                </div>
+            </div>
+            <div class="time-view-btn">
+                <button class="button" (click)="setTimeView()">Set Time</button>
+            </div>
+        </div>
+        <table class="calendar-days" (click)="setDay($event,'range');" [hidden]="monthsView || yearView">
+            <tr *ngFor="let week of monthDays">
+                <td [ngClass]="{'calendar-day': day.day != null,'today': day.day == today.getDate() && dateRange.startDate?.getMonth() == today.getMonth() && dateRange.startDate?.getFullYear() == today.getFullYear(),'selected-day': day.date.toString() == dateRange.startDate.toString() || day.date.toString() == dateRange.endDate.toString()}"
+                    *ngFor="let day of week">
+                    <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
+                </td>
+
+            </tr>
+        </table>
+        <div class="cal-util">
+            <div class="ok" (click)="done()"><i class="fa fa-check"></i>Done
+            </div>
+        </div>
+    </div>
+
+    <div class="dp-right-section">
+        <div class="wc-details">
+            <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
+            <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{dateRange.endDate | date: 'MMMM'}}
+                <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
+                                 <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->
+            </div>
+            <div class="month-year" *ngIf="!settings.bigBanner" (click)="toggleMonthView()">
+                {{dateRange.endDate | date: 'MMMM'}}
                 <!--    <i ng-show="!monthsView" class="fa fa-arrow-down" (click)="toggleMonthView()"></i>
                                     <i ng-show="monthsView" class="fa fa-arrow-up" (click)="toggleMonthView()"></i>  -->
 
@@ -55,27 +271,28 @@
                 <td class="calendar-header-day">Sa</td>
             </tr>
         </table>
-       <div class="months-view" [hidden]="!monthsView" (click)="setMonth($event)">
-            <span *ngFor="let month of settings.cal_months_labels_short" [ngClass]="{'current-month': month == settings.cal_months_labels_short[date.getMonth()]}" id="{{month}}">{{month}}</span>
+        <div class="months-view" [hidden]="!monthsView" (click)="setMonth($event)">
+            <span *ngFor="let month of settings.cal_months_labels_short" [ngClass]="{'current-month': month == settings.cal_months_labels_short[date?.getMonth()]}"
+                id="{{month}}">{{month}}</span>
         </div>
         <div class="years-view" *ngIf="yearView">
             <div class="fa fa-angle-left prev" (click)="generateYearList('prev')"></div>
             <div class="fa fa-angle-right next" (click)="generateYearList('next')"></div>
             <div class="years-list-view" (click)="setYear($event)">
-                <span *ngFor="let year of yearsList" [ngClass]="{'current-year': year == date.getFullYear()}" id="{{year}}">{{year}}</span>
+                <span *ngFor="let year of yearsList" [ngClass]="{'current-year': year == date?.getFullYear()}" id="{{year}}">{{year}}</span>
             </div>
         </div>
-       <div class="time-view" [hidden]="!timeView">
+        <div class="time-view" [hidden]="!timeView">
             <div class="time">
                 <div class="hour">
                     <span class="fa fa-plus inc-btn" (click)="incHour()"></span>
-                    <input type="number" value="{{hourValue}}" [(ngModel)] = "hourValue" autofocus/>
+                    <input type="number" value="{{hourValue}}" [(ngModel)]="hourValue" autofocus/>
                     <span class="fa fa-minus dec-btn" (click)="decHour()"></span>
                 </div>
                 <div class="time-divider">:</div>
                 <div class="minutes">
-                    <span class="fa fa-plus inc-btn" (click)="incMinutes()"></span>                    
-                    <input type="number" value="{{minValue}}" [(ngModel)] = "minValue"/>
+                    <span class="fa fa-plus inc-btn" (click)="incMinutes()"></span>
+                    <input type="number" value="{{minValue}}" [(ngModel)]="minValue" />
                     <span class="fa fa-minus dec-btn" (click)="decMinutes()"></span>
                 </div>
             </div>
@@ -89,18 +306,15 @@
                 <button class="button" (click)="setTimeView()">Set Time</button>
             </div>
         </div>
-        <table class="calendar-days" (click)="setDay($event);" [hidden]="monthsView || yearView">
-            <tr *ngFor="let week of monthDays">
-                <td [ngClass]="{'calendar-day': day != null,'today': day == today.getDate() && date.getMonth() == today.getMonth() && date.getFullYear() == today.getFullYear(),'selected-day': day == date.getDate()}"
+        <table class="calendar-days" (click)="setDay($event,'range');" [hidden]="monthsView || yearView">
+            <tr *ngFor="let week of toMonthDays">
+                <td [ngClass]="{'calendar-day': day != null,'today': day == today.getDate() && dateRange.endDate?.getMonth() == today.getMonth() && dateRange.endDate?.getFullYear() == today.getFullYear(),'selected-day': day == dateRange.endDate?.getDate()}"
                     *ngFor="let day of week">
-                    <span>{{day}}</span>
+                    <span>{{day.day}}</span>
                 </td>
 
             </tr>
         </table>
-        <!-- <div ng-if="!bigBanner">
-            <i class="fa fa-clock-o" aria-hidden="true" (click)="toggleTimeView()"></i>
-        </div>-->
         <div class="cal-util">
             <div class="ok" (click)="done()"><i class="fa fa-check"></i>Done
             </div>

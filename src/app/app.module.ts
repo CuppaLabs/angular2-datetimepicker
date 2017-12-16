@@ -8,6 +8,7 @@ import { AdsenseComponent } from './adsense.component';
 import { DatePickerExample } from './examples/datepicker';
 import { DateTimePickerExample } from './examples/datetimepicker';
 import { SimpleDatePickerExample } from './examples/simpledatepicker';
+import { UsingWithFormExample } from './examples/usingWithForms';
 import { AppRouterModule } from './app.router';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AppRouterModule } from './app.router';
     AdsenseComponent,
     DatePickerExample,
     DateTimePickerExample,
-    SimpleDatePickerExample
+    SimpleDatePickerExample,
+    UsingWithFormExample
       ],
   imports: [
     AngularDateTimePickerModule,

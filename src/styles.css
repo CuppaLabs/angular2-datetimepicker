@@ -1,35 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-  padding-top: 3.5rem;
-  background-color: #f0f0f2 !important;
-  font-size: 14px !important;
-  background-size: cover;
+body{
+   background-color: rgb(246, 246, 246) !important;
 }
-.navbar{
-    box-shadow: 0 0 4px rgba(0,0,0,.14), 0 1px 1px rgba(0,0,0,.28);
-    background: #fff;
+.navbar-default{
+    border-radius: 0px !important;
+    background-color: #fff !important;
+    margin: 0px !important;
 }
-.navbar-nav > .nav-item{
-    padding: 0px 5px;
+.example-title{
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 75px;
 }
-.navbar-brand{
-    min-width: 200px;
+.row{
+    margin: 0px !important;
+    margin-bottom: 20px !important;
 }
-.ad-sidebar{
-    right: 0 !important;
-    left: auto !important;
-    background: #fff;
-    max-width: 300px !important;
-    padding: 0px !important;
+.navbar-brand>img {
+    height: 32px;
+    margin-top: -6px;
 }
 .component-title{
-    padding: 0px !important;
-    font-size: 24px;
-    color: #000;
-    font-weight: 600;
-    margin-right: 15px;
-    line-height: 30px;
+    font-size: 18px;
+    color: #333 !important;
 }
-.fixed-top{
-    z-index: 99999 !important;
+.jumbotron{
+    text-align: center;
+    color: #fff !important;
+}
+.jumbotron h1{
+    text-shadow: 1px 1px 0px #7d7d7d;
+}
+h4{
+    color: #686868;
+}
+@media screen and (min-width: 768px){
+    .jumbotron{
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+        margin: 0px;
+        background: none !important;
+    }
+    .jumbotron .h1, .jumbotron h1{
+        font-size: 42px !important;
+        color: #fff !important;
+    }
+}
+.code-section {
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+.ui-tabview-nav {
+    background: #007bff !important;
+}
+.ui-tabview .ui-tabview-nav > li.ui-state-default {
+    background: #007bff !important;
+}
+.ui-state-default a {
+    color: #fff !important;
+}
+.ui-tabview .ui-tabview-nav > li.ui-state-active {
+    background: #fff !important;
+}
+.ui-tabview .ui-tabview-nav > li.ui-state-active > a{
+    color: #333 !important;
+}
+.ui-tabview-panel {
+    padding: 0px !important;
+    margin: 0px -7px;
+}
+.custom-class-example {
+    color: #ccc;
+}
+.custom-class-example .c-token{
+    background: #38d574 !important;
+}
+.custom-class-example .pure-checkbox label::before {
+    border-color: #38d574 !important;
+}
+.custom-class-example .pure-checkbox input[type="checkbox"]:checked + label[_ngcontent-c1]:before {
+    background: #38d574 !important;
+}
+.outer-wrapper {
+    margin-top: 15px;
+}
+.dropdown-container {
+    height: 170px;
 }

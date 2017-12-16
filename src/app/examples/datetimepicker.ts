@@ -5,7 +5,7 @@ import { Component, OnInit, AfterViewInit  } from '@angular/core';
             <angular2-date-picker [(ngModel)]="date" [settings]="settings"></angular2-date-picker>
   `
 })
-export class DateTimePickerExample implements OnInit, AfterViewInit  {
+export class DateTimePickerExample implements OnInit {
   date: Date = new Date();
   settings = {
         bigBanner: true,
@@ -16,15 +16,6 @@ export class DateTimePickerExample implements OnInit, AfterViewInit  {
   constructor(){
     
   }
-  ngAfterViewInit() {
-         setTimeout(()=>{
-          try{
-            (window['adsbygoogle'] = window['adsbygoogle'] || []).push({});
-          }catch(e){
-            console.error("error");
-          }
-        },0);
-     }     
    ngOnInit(){
 
    }

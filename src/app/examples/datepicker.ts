@@ -1,18 +1,17 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
-  template: `
-            <angular2-date-picker [(ngModel)]="date" [settings]="settings" (onDateSelect)="onDateSelect($event)"></angular2-date-picker>
-  `
+  templateUrl: './views/basic.html'
 })
-export class DatePickerExample implements OnInit, AfterViewInit {
-  date: Date = new Date();
+export class DatePickerExample implements OnInit {
+  date: any = {startDate: new Date('04-18-1990'), endDate: new Date('10-30-2017')};
   settings = {
     bigBanner: true,
     timePicker: false,
     format: 'dd-MM-yyyy',
     defaultOpen: true,
-    closeOnSelect: false
+    closeOnSelect: false,
+    rangepicker: true
   }
   constructor() {
 
@@ -20,16 +19,8 @@ export class DatePickerExample implements OnInit, AfterViewInit {
   onDateSelect(date: any){
     console.log(date);
   }
-  ngAfterViewInit() {
-    setTimeout(() => {
-      try {
-        (window['adsbygoogle'] = window['adsbygoogle'] || []).push({});
-      } catch (e) {
-        console.error("error");
-      }
-    }, 0);
-  }
   ngOnInit() {
 
   }
+  title: string = "Basic Example";
 }
