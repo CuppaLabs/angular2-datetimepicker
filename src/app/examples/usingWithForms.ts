@@ -4,6 +4,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
     templateUrl: './views/usingwithforms.html'
 })
 export class UsingWithFormExample implements OnInit {
+    title: string = "Using with angular forms";
     formModel = {
         name: '',
         dob:  new Date(),

@@ -22,5 +22,5 @@ export class DateRangePickerExample implements OnInit {
   ngOnInit() {
 
   }
-  title: string = "Basic Example";
+  title: string = "Range picker Example";
 }

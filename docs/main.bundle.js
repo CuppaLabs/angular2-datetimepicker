@@ -400,8 +400,8 @@ var DatePicker = /** @class */ (function () {
                 }
             }
             else {
-                //  this.date = new Date(selectedDay);
-                // this.onChangeCallback(this.date.toString());
+                this.date = new Date(selectedDay);
+                this.onChangeCallback(this.date.toString());
             }
             if (this.settings.closeOnSelect) {
                 this.popover = false;
@@ -966,7 +966,7 @@ var DateRangePickerExample = /** @class */ (function () {
             closeOnSelect: false,
             rangepicker: true
         };
-        this.title = "Basic Example";
+        this.title = "Range picker Example";
     }
     DateRangePickerExample.prototype.onDateSelect = function (date) {
         console.log(date);
@@ -1045,6 +1045,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var UsingWithFormExample = /** @class */ (function () {
     function UsingWithFormExample() {
+        this.title = "Using with angular forms";
         this.formModel = {
             name: '',
             dob: new Date(),
