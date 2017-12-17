@@ -975,7 +975,7 @@ var DateRangePickerExample = /** @class */ (function () {
     };
     DateRangePickerExample = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
-            template: __webpack_require__("../../../../../src/app/examples/views/basic.html")
+            template: __webpack_require__("../../../../../src/app/examples/views/rangepicker.html")
         }),
         __metadata("design:paramtypes", [])
     ], DateRangePickerExample);
@@ -1082,6 +1082,13 @@ var UsingWithFormExample = /** @class */ (function () {
 /***/ (function(module, exports) {
 
 module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n    <angular2-date-picker [(ngModel)]=\"date\" [settings]=\"settings\" (onDateSelect)=\"onDateSelect($event)\"></angular2-date-picker>\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/examples/views/rangepicker.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"example-title\">{{title}}</h2>\r\n    <div class=\"alert alert-danger\" role=\"alert\">\r\n Date Rangepicker is still under development. Please stay tuned for updates !! Thank you for visiting.\r\n</div>\r\n<div class=\"col-md-6 mr-auto ml-auto dropdown-container\">\r\n\r\n    <angular2-date-picker [(ngModel)]=\"date\" [settings]=\"settings\" (onDateSelect)=\"onDateSelect($event)\"></angular2-date-picker>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
