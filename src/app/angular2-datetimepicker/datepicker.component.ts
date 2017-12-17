@@ -243,21 +243,40 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.date = new Date(this.date);
         this.timeView = !this.timeView;
     }
-    rangeSelected : boolean = false;
+
+    /***
+     * (ssd > endDay -> startDay = endDay -> step = 1 ) && (sed > startDay -> 2)
+     * (ssd < endDay -> startDay = ssd - step =1) && (sed < startDay -> 2 )
+     * 
+     */
+
+    rangeSelected : number = 0;
     setDay(evt: any, type:string) {
         if (evt.target.innerHTML) {
             var selectedDay = new Date(evt.target.getAttribute('data-label'));
-            if(type == 'range' && !this.rangeSelected){
-                this.dateRange.startDate = new Date(selectedDay);
+            if(type == 'range'){
+                if(this.rangeSelected == 0){
+                    this.setStartDate(selectedDay);
+                }
+                else if(this.rangeSelected == 1){
+                    this.setEndDate(selectedDay);
+                }
+            }
+/*            else if(type == 'range' && !this.rangeSelected){
+                if(selectedDay < this.dateRange.startDate){
+                    this.dateRange.endDate  = new Date(selectedDay);
+                    this.dateRange.startDate = new Date(selectedDay);
+                }
+                else{
+                    this.dateRange.endDate = new Date(selectedDay);
                 this.rangeSelected = true;
-            }
-            else if(type == 'range' && this.rangeSelected){
-                this.dateRange.endDate = new Date(selectedDay);
-                this.rangeSelected = false;
-            }
+                }
+                this.rangeSelected = true;
+
+            }*/
             else {
-                this.date = new Date(selectedDay);
-                this.onChangeCallback(this.date.toString());
+              //  this.date = new Date(selectedDay);
+               // this.onChangeCallback(this.date.toString());
 
             }
             if (this.settings.closeOnSelect) {
@@ -265,6 +284,40 @@ export class DatePicker implements OnInit, ControlValueAccessor {
                 this.onDateSelect.emit(this.date);
             }
         }
+    }
+    setStartDate(selectedDate:Date){
+        if(selectedDate < this.dateRange.endDate){
+            this.dateRange.startDate = new Date(selectedDate);
+        }
+        else if(selectedDate > this.dateRange.endDate){
+            this.dateRange.startDate = new Date(selectedDate);
+            this.dateRange.endDate  = new Date(selectedDate);
+        }
+        this.rangeSelected = 1;
+    }
+    setEndDate(selectedDate:Date){
+        if(selectedDate > this.dateRange.startDate && (this.dateRange.startDate != this.dateRange.endDate )){
+            this.dateRange.endDate  = new Date(selectedDate);
+        }
+        else if(selectedDate > this.dateRange.startDate && (this.dateRange.startDate == this.dateRange.endDate )){
+            this.dateRange.endDate  = new Date(selectedDate);
+        }
+        else if(selectedDate < this.dateRange.startDate && (this.dateRange.startDate != this.dateRange.endDate )){
+            this.dateRange.startDate = new Date(selectedDate);
+            this.dateRange.endDate  = new Date(selectedDate);
+        }
+        else if(selectedDate < this.dateRange.startDate && (this.dateRange.startDate == this.dateRange.endDate )){
+            this.dateRange.startDate = new Date(selectedDate);
+            this.dateRange.endDate  = new Date(selectedDate);
+        }
+        else if(selectedDate.getTime() == this.dateRange.startDate.getTime()){
+            this.dateRange.startDate = new Date(selectedDate);
+            this.dateRange.endDate  = new Date(selectedDate);
+        }
+        this.rangeSelected = 0;
+    }
+    highlightRange(date: Date){
+        return (date > this.dateRange.startDate && date < this.dateRange.endDate);
     }
     setYear(evt: any) {
         console.log(evt.target);
@@ -348,7 +401,16 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.popover = false;
         this.onDateSelect.emit(this.date);
     }
+    togglePopover(){
+        if(this.popover){
+            this.closepopover();
+        }
+        else {
+            this.popover = true;
+        }
+    }
     closepopover() {
+        this.rangeSelected = 0;
         this.popover = false;
     }
     composeDate(date: Date){

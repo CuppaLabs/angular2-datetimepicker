@@ -9,7 +9,9 @@ import { DatePickerExample } from './examples/datepicker';
 import { DateTimePickerExample } from './examples/datetimepicker';
 import { SimpleDatePickerExample } from './examples/simpledatepicker';
 import { UsingWithFormExample } from './examples/usingWithForms';
+import { DateRangePickerExample } from './examples/rangepicker';
 import { AppRouterModule } from './app.router';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { AppRouterModule } from './app.router';
     DatePickerExample,
     DateTimePickerExample,
     SimpleDatePickerExample,
-    UsingWithFormExample
+    UsingWithFormExample,
+    DateRangePickerExample
       ],
   imports: [
     AngularDateTimePickerModule,

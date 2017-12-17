@@ -3,15 +3,15 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 @Component({
   templateUrl: './views/basic.html'
 })
-export class DatePickerExample implements OnInit {
-  date: any = '04-18-1990';
+export class DateRangePickerExample implements OnInit {
+  date: any = {startDate: new Date('04-18-1990'), endDate: new Date('10-20-2017')};
   settings = {
     bigBanner: true,
     timePicker: false,
     format: 'dd-MM-yyyy',
     defaultOpen: true,
     closeOnSelect: false,
-    rangepicker: false
+    rangepicker: true
   }
   constructor() {
 

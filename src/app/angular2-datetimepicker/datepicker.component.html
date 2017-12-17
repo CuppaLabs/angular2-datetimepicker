@@ -94,9 +94,9 @@
     </div>
     <table class="calendar-days" (click)="setDay($event);" [hidden]="monthsView || yearView">
         <tr *ngFor="let week of monthDays">
-            <td [ngClass]="{'calendar-day': day != null,'today': day == today.getDate() && date?.getMonth() == today.getMonth() && date?.getFullYear() == today.getFullYear(),'selected-day': day == date?.getDate()}"
+            <td [ngClass]="{'calendar-day': day.day != null,'today': day == today.getDate() && date?.getMonth() == today.getMonth() && date?.getFullYear() == today.getFullYear(),'selected-day': day.day == date?.getDate()}"
                 *ngFor="let day of week">
-                <span>{{day}}</span>
+                <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
             </td>
 
         </tr>
@@ -108,12 +108,12 @@
 </div>
 <span *ngIf="settings.rangepicker">
         <input type="hidden" class="wc-input" value="{{date}}">
-<div class="range-input">
-        <div class="wc-date-container" (click)="popover = !popover">
+<div class="range-input" (click)="togglePopover()">
+        <div class="wc-date-container" >
             <span>{{dateRange?.startDate | date: settings.format}}</span>
 <i class="fa fa-arrow-circle-o-right range-direc"></i>
 </div>
-<div class="wc-date-container to-input" (click)="popover = !popover">
+<div class="wc-date-container to-input">
     <span>{{dateRange?.endDate | date: settings.format}}</span>
     <i class="fa fa-calendar"></i>
 </div>
@@ -225,7 +225,7 @@
         </div>
         <table class="calendar-days" (click)="setDay($event,'range');" [hidden]="monthsView || yearView">
             <tr *ngFor="let week of monthDays">
-                <td [ngClass]="{'calendar-day': day.day != null,'today': day.day == today.getDate() && dateRange.startDate?.getMonth() == today.getMonth() && dateRange.startDate?.getFullYear() == today.getFullYear(),'selected-day': day.date.toString() == dateRange.startDate.toString() || day.date.toString() == dateRange.endDate.toString()}"
+                <td [ngClass]="{'range-highlight':highlightRange(day.date),'calendar-day': day.day != null,'today': day.day == today.getDate() && dateRange.startDate?.getMonth() == today.getMonth() && dateRange.startDate?.getFullYear() == today.getFullYear(),'selected-day': day.date.toString() == dateRange.startDate.toString() || day.date.toString() == dateRange.endDate.toString()}"
                     *ngFor="let day of week">
                     <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
                 </td>
@@ -308,9 +308,9 @@
         </div>
         <table class="calendar-days" (click)="setDay($event,'range');" [hidden]="monthsView || yearView">
             <tr *ngFor="let week of toMonthDays">
-                <td [ngClass]="{'calendar-day': day != null,'today': day == today.getDate() && dateRange.endDate?.getMonth() == today.getMonth() && dateRange.endDate?.getFullYear() == today.getFullYear(),'selected-day': day == dateRange.endDate?.getDate()}"
+                <td [ngClass]="{'range-highlight':highlightRange(day.date),'calendar-day': day != null,'today': day == today.getDate() && dateRange.endDate?.getMonth() == today.getMonth() && dateRange.endDate?.getFullYear() == today.getFullYear(),'selected-day': day.date.toString() == dateRange.startDate.toString() || day.date.toString() == dateRange.endDate.toString()}"
                     *ngFor="let day of week">
-                    <span>{{day.day}}</span>
+                    <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
                 </td>
 
             </tr>
