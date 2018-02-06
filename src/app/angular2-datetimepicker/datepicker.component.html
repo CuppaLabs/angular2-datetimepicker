@@ -84,12 +84,12 @@
         </div>
         <div class="meridian">
             <div class="cuppa-btn-group">
-                <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
-                <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
+                <button type="button" [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
+                <button type="button" [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
             </div>
         </div>
         <div class="time-view-btn">
-            <button class="button" (click)="setTimeView()">Set Time</button>
+            <button type="button" class="button" (click)="setTimeView()">Set Time</button>
         </div>
     </div>
     <table class="calendar-days" (click)="setDay($event);" [hidden]="monthsView || yearView">
@@ -215,12 +215,12 @@
             </div>
             <div class="meridian">
                 <div class="cuppa-btn-group">
-                    <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
-                    <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
+                    <button type="button" [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
+                    <button type="button" [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
                 </div>
             </div>
             <div class="time-view-btn">
-                <button class="button" (click)="setTimeView()">Set Time</button>
+                <button type="button" class="button" (click)="setTimeView()">Set Time</button>
             </div>
         </div>
         <table class="calendar-days" (click)="setDay($event,'range');" [hidden]="monthsView || yearView">
@@ -298,12 +298,12 @@
             </div>
             <div class="meridian">
                 <div class="cuppa-btn-group">
-                    <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
-                    <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
+                    <button type="button" [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
+                    <button type="button" [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
                 </div>
             </div>
             <div class="time-view-btn">
-                <button class="button" (click)="setTimeView()">Set Time</button>
+                <button type="button" class="button" (click)="setTimeView()">Set Time</button>
             </div>
         </div>
         <table class="calendar-days" (click)="setDay($event,'range');" [hidden]="monthsView || yearView">

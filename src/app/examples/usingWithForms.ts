@@ -11,7 +11,7 @@ export class UsingWithFormExample implements OnInit {
     };
     dobSettings = {
         bigBanner: true,
-        timePicker: false,
+        timePicker: true,
         format: 'dd-MM-yyyy',
         defaultOpen: true,
         closeOnSelect: true,
@@ -28,6 +28,10 @@ export class UsingWithFormExample implements OnInit {
 
     }
     submitted = false;
-    onSubmit() { this.submitted = true; }
+    onSubmit() { 
+        console.log('form submitted');
+        this.submitted = true; 
+        
+    }
 
 }
