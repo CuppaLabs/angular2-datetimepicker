@@ -3,7 +3,6 @@ import { DatePipe } from '@angular/common';
 import { DateRange } from './model';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Settings } from './interface';
-import * as moment from 'moment';
 
 export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -46,6 +45,8 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     toMonthDays: Array<any> = [];
     monthsView: boolean = false;
     today: Date = new Date();
+    leftDate: Date = new Date();
+    rightDate: Date = new Date();
 
     defaultSettings: Settings = {
         defaultOpen: false,
@@ -76,17 +77,31 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     private onChangeCallback: (_: any) => {};
     writeValue(value: any) {
         if (value !== undefined && value !== null) {
-            if(!this.settings.rangepicker){
+            if (!this.settings.rangepicker) {
                 this.initDate(value);
                 this.monthDays = this.generateDays(this.date);
             }
-            else{
+            else {
                 this.initDateRange(value);
-                this.monthDays = this.generateDays(this.dateRange.startDate);
-                this.toMonthDays = this.generateDays(this.dateRange.endDate);
+                if (this.dateRange.startDate.getMonth() === this.dateRange.endDate.getMonth() && this.dateRange.startDate.getFullYear() === this.dateRange.endDate.getFullYear()) {
+                    this.leftDate = new Date(this.dateRange.startDate);
+                    var tempDate = new Date(this.dateRange.startDate);
+                    tempDate.setMonth(tempDate.getMonth() + 1);
+                    tempDate.setDate(1);
+                    this.rightDate = new Date(tempDate);
+                    this.monthDays = this.generateDays(this.leftDate);
+                    this.toMonthDays = this.generateDays(this.rightDate);
+                }
+                else {
+                    this.leftDate = new Date(this.dateRange.startDate);
+                    this.rightDate = new Date(this.dateRange.endDate);
+                    this.monthDays = this.generateDays(this.leftDate);
+                    this.toMonthDays = this.generateDays(this.rightDate);
+                }
+
                 console.log(this.monthDays);
             }
-            
+
         }
         else {
             this.date = new Date();
@@ -113,7 +128,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         }
         this.minValue = this.date.getMinutes();
     }
-    initDateRange(val: DateRange){
+    initDateRange(val: DateRange) {
         this.dateRange.startDate = new Date(val.startDate);
         this.dateRange.endDate = new Date(val.endDate);
         if (this.dateRange.startDate.getHours() <= 11) {
@@ -170,7 +185,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
                     }
                     day++;
                 }
-                dateRow.push({day:dateCell, date: new Date((month+1)+'-'+dateCell+'-'+date.getFullYear())});
+                dateRow.push({ day: dateCell, date: new Date((month + 1) + '-' + dateCell + '-' + date.getFullYear()) });
             }
             // stop making rows if we've run out of days
             if (day > monthLength) {
@@ -250,30 +265,18 @@ export class DatePicker implements OnInit, ControlValueAccessor {
      * 
      */
 
-    rangeSelected : number = 0;
-    setDay(evt: any, type:string) {
+    rangeSelected: number = 0;
+    setDay(evt: any, type: string) {
         if (evt.target.innerHTML) {
             var selectedDay = new Date(evt.target.getAttribute('data-label'));
-            if(type == 'range'){
-                if(this.rangeSelected == 0){
+            if (type == 'range') {
+                if (this.rangeSelected == 0) {
                     this.setStartDate(selectedDay);
                 }
-                else if(this.rangeSelected == 1){
+                else if (this.rangeSelected == 1) {
                     this.setEndDate(selectedDay);
                 }
             }
-/*            else if(type == 'range' && !this.rangeSelected){
-                if(selectedDay < this.dateRange.startDate){
-                    this.dateRange.endDate  = new Date(selectedDay);
-                    this.dateRange.startDate = new Date(selectedDay);
-                }
-                else{
-                    this.dateRange.endDate = new Date(selectedDay);
-                this.rangeSelected = true;
-                }
-                this.rangeSelected = true;
-
-            }*/
             else {
                 this.date = new Date(selectedDay);
                 this.onChangeCallback(this.date.toString());
@@ -285,38 +288,38 @@ export class DatePicker implements OnInit, ControlValueAccessor {
             }
         }
     }
-    setStartDate(selectedDate:Date){
-        if(selectedDate < this.dateRange.endDate){
+    setStartDate(selectedDate: Date) {
+        if (selectedDate < this.dateRange.endDate) {
             this.dateRange.startDate = new Date(selectedDate);
         }
-        else if(selectedDate > this.dateRange.endDate){
+        else if (selectedDate > this.dateRange.endDate) {
             this.dateRange.startDate = new Date(selectedDate);
-            this.dateRange.endDate  = new Date(selectedDate);
+            this.dateRange.endDate = new Date(selectedDate);
         }
         this.rangeSelected = 1;
     }
-    setEndDate(selectedDate:Date){
-        if(selectedDate > this.dateRange.startDate && (this.dateRange.startDate != this.dateRange.endDate )){
-            this.dateRange.endDate  = new Date(selectedDate);
+    setEndDate(selectedDate: Date) {
+        if (selectedDate > this.dateRange.startDate && (this.dateRange.startDate != this.dateRange.endDate)) {
+            this.dateRange.endDate = new Date(selectedDate);
         }
-        else if(selectedDate > this.dateRange.startDate && (this.dateRange.startDate == this.dateRange.endDate )){
-            this.dateRange.endDate  = new Date(selectedDate);
+        else if (selectedDate > this.dateRange.startDate && (this.dateRange.startDate == this.dateRange.endDate)) {
+            this.dateRange.endDate = new Date(selectedDate);
         }
-        else if(selectedDate < this.dateRange.startDate && (this.dateRange.startDate != this.dateRange.endDate )){
+        else if (selectedDate < this.dateRange.startDate && (this.dateRange.startDate != this.dateRange.endDate)) {
             this.dateRange.startDate = new Date(selectedDate);
-            this.dateRange.endDate  = new Date(selectedDate);
+            this.dateRange.endDate = new Date(selectedDate);
         }
-        else if(selectedDate < this.dateRange.startDate && (this.dateRange.startDate == this.dateRange.endDate )){
+        else if (selectedDate < this.dateRange.startDate && (this.dateRange.startDate == this.dateRange.endDate)) {
             this.dateRange.startDate = new Date(selectedDate);
-            this.dateRange.endDate  = new Date(selectedDate);
+            this.dateRange.endDate = new Date(selectedDate);
         }
-        else if(selectedDate.getTime() == this.dateRange.startDate.getTime()){
+        else if (selectedDate.getTime() == this.dateRange.startDate.getTime()) {
             this.dateRange.startDate = new Date(selectedDate);
-            this.dateRange.endDate  = new Date(selectedDate);
+            this.dateRange.endDate = new Date(selectedDate);
         }
         this.rangeSelected = 0;
     }
-    highlightRange(date: Date){
+    highlightRange(date: Date) {
         return (date > this.dateRange.startDate && date < this.dateRange.endDate);
     }
     setYear(evt: any) {
@@ -401,8 +404,8 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.popover = false;
         this.onDateSelect.emit(this.date);
     }
-    togglePopover(){
-        if(this.popover){
+    togglePopover() {
+        if (this.popover) {
             this.closepopover();
         }
         else {
@@ -413,7 +416,41 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.rangeSelected = 0;
         this.popover = false;
     }
-    composeDate(date: Date){
-        return (date.getMonth()+1)+'-'+date.getDate()+'-'+date.getFullYear();
+    composeDate(date: Date) {
+        return (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear();
+    }
+    getCurrentWeek() {
+        var curr_date = new Date();
+
+        var day = curr_date.getDay();
+
+        var diff = curr_date.getDate() - day + (day == 0 ? -6 : 1); // 0 for sunday
+
+        var week_start_tstmp = curr_date.setDate(diff);
+
+        var week_start = new Date(week_start_tstmp);
+
+
+        var week_end = new Date(week_start_tstmp);  // first day of week 
+
+        week_end = new Date(week_end.setDate(week_end.getDate() + 6));
+
+
+        var date = week_start + ' to ' + week_end;    // date range for current week
+        console.log(date);
+        if (week_start.getMonth() === week_end.getMonth()) {
+            this.monthDays = this.generateDays(week_start);
+            var tempDate = new Date(week_end);
+            tempDate.setMonth(tempDate.getMonth() + 1);
+            tempDate.setDate(1);
+            this.toMonthDays = this.generateDays(tempDate);
+        }
+        else {
+            this.monthDays = this.generateDays(week_start);
+            this.toMonthDays = this.generateDays(week_end);
+        }
+
+        this.setStartDate(week_start);
+        this.setEndDate(week_end);
     }
 }
