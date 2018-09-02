@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "angular-cli": {},
-  "author":"Pradeep Terli",
+  "author": "Pradeep Terli",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -38,21 +38,21 @@
     "test": "karma start",
     "test:watch": "karma start --auto-watch --no-single-run",
     "tslint": "tslint",
-    "github-pages":"ng build --base-href /angular2-datetimepicker/"
+    "github-pages": "ng build --base-href /angular2-datetimepicker/"
   },
   "private": false,
   "dependencies": {
-    "font-awesome":"*"
+    "font-awesome": "*"
   },
   "devDependencies": {
-"@angular/common": "^4.0.0",
+    "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/cli": "^1.3.2",
     "@angular/core": "^4.0.0",
-     "@angular/forms": "^4.0.0",
+    "@angular/forms": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",    
+    "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@compodoc/compodoc": "^1.0.0-beta.9",
     "@types/jasmine": "^2.5.47",
@@ -68,7 +68,7 @@
     "css-loader": "^0.28.1",
     "gh-pages": "^1.0.0",
     "gulp": "^3.9.1",
-    "gulp-copy":"^1.0.1",
+    "gulp-copy": "^1.0.1",
     "gulp-inline-ng2-template": "^4.0.0",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.6.1",
@@ -80,12 +80,12 @@
     "karma-mocha-reporter": "^2.2.3",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
-    "ng2-adsense":"*",
+    "ng2-adsense": "*",
     "node-sass": "^4.5.2",
     "raw-loader": "^0.5.1",
     "rimraf": "2.6.1",
     "rxjs": "^5.3.1",
-    "protractor":"*",
+    "protractor": "*",
     "sass-loader": "^6.0.5",
     "source-map-explorer": "^1.3.3",
     "to-string-loader": "^1.1.5",
@@ -97,7 +97,7 @@
     "webpack-rxjs-externals": "^1.0.0",
     "zone.js": "^0.8.10"
   },
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/CuppaLabs/angular2-datetimepicker"
   },
