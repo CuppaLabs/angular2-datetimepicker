@@ -83,7 +83,7 @@
         <div class="time">
             <div class="hour">
                 <span class="fa fa-plus inc-btn" (click)="incHour()"></span>
-                <input type="number" value="{{hourValue}}" [(ngModel)]="hourValue" autofocus/>
+                <input type="number" value="{{hourValue}}" [(ngModel)]="hourValue" autofocus (change)="changeInputHour()"/>
                 <span class="fa fa-minus dec-btn" (click)="decHour()"></span>
             </div>
             <div class="time-divider">:</div>

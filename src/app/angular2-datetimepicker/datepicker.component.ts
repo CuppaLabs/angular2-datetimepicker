@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { DateRange } from './model';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Settings } from './interface';
+import * as moment from 'moment';
 
 export const DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -414,7 +415,6 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     }
   }
   closepopover() {
-    //console.log('shouldClose: ', shouldClose);
     this.rangeSelected = 0;
     this.popover = false;
   }
@@ -484,4 +484,31 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     return (firstDay.day == selectedDate.getDate() && firstDay.month == selectedDate.getMonth() && firstDay.year == selectedDate.getFullYear()) ? true : false;
   }
 
+
+  changeInputHour() {
+    let is12HFormat = this.settings.format.slice(-1)  === 'a' ? true : false;
+    if (is12HFormat && (this.hourValue > 12 || this.hourValue < 0)) {
+      this.hourValue = +moment(new Date()).format("hh");
+    }
+
+    //Make date and check is time is passed - set hour to current hour -
+    // get hour , minute and and am pm value
+    //
+    // if (this.hourValue < +moment(new Date()).format("hh")) {
+    //   this.hourValue = +moment(new Date()).format("hh");
+    // }
+  }
+
+  changeInputMinute() {
+    let is12HFormat = this.settings.format.slice(-1)  === 'a' ? true : false;
+    if (is12HFormat && (this.hourValue > 12 || this.hourValue < 0)) {
+      this.hourValue = +moment(new Date()).format("hh");
+    }
+
+    //Make date and check is time is passed - set hour to current hour
+    //
+    // if (this.hourValue < +moment(new Date()).format("hh")) {
+    //   this.hourValue = +moment(new Date()).format("hh");
+    // }
+  }
 }
