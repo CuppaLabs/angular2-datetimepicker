@@ -323,8 +323,8 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     return (date > this.dateRange.startDate && date < this.dateRange.endDate);
   }
   setYear(evt: any) {
-    console.log(evt.target);
     var selectedYear = parseInt(evt.target.getAttribute('id'));
+    if (isNaN(selectedYear)) return;
     this.date = new Date(this.date.setFullYear(selectedYear));
     this.yearView = !this.yearView;
     this.monthDays = this.generateDays(this.date);
@@ -461,6 +461,19 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     return (new Date(day.date) < minDate) ? true : false;
   }
 
+  isBackYear(year) {
+    const { minDate } = this.settings;
+    return (year < minDate.getFullYear()) ? true: false;
+  }
+
+  isBackMonth(month) {
+    const { minDate } = this.settings;
+    const yearSelected = this.date.getFullYear();
+    let monthCondition = this.defaultSettings.cal_months_labels_short.indexOf(month) < minDate.getMonth();
+    let yearCondition = yearSelected <= minDate.getFullYear();
+    return (monthCondition && yearCondition) ? true: false;
+  }
+
   isFirstDayOfCalendar(date) {
     const firstDay = {
       day: 1,
@@ -470,4 +483,5 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     let selectedDate = new Date(date);
     return (firstDay.day == selectedDate.getDate() && firstDay.month == selectedDate.getMonth() && firstDay.year == selectedDate.getFullYear()) ? true : false;
   }
+
 }
