@@ -95,10 +95,15 @@
     </div>
     <table class="calendar-days" (click)="setDay($event);" [hidden]="monthsView || yearView">
         <tr *ngFor="let week of monthDays">
-            <td [ngClass]="{'calendar-day': day.day != null,'today': day == today.getDate() && date?.getMonth() == today.getMonth() && date?.getFullYear() == today.getFullYear(),'selected-day': day.day == date?.getDate()}"
-                *ngFor="let day of week">
-                <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
-            </td>
+          <td [ngClass]="{
+            'calendar-day': day.day != null,
+            'today': day == today.getDate() && date?.getMonth() == today.getMonth() && date?.getFullYear() == today.getFullYear(),
+            'selected-day': day.day == date?.getDate(),
+            'disable-date': isBackDate(day)
+          }"
+          *ngFor="let day of week">
+          <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
+        </td>
 
         </tr>
     </table>

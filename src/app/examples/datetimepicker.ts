@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   template: `
@@ -8,15 +8,17 @@ import { Component, OnInit, AfterViewInit  } from '@angular/core';
 export class DateTimePickerExample implements OnInit {
   date: Date = new Date();
   settings = {
-        bigBanner: true,
-        timePicker: true,
-        format: 'dd-MM-yyyy hh:mm',
-        defaultOpen: true
-    }
-  constructor(){
-    
+    bigBanner: true,
+    timePicker: true,
+    format: 'dd-MM-yyyy hh:mm a',
+    defaultOpen: false,
+    closeOnSelect: false,
+    minDate: new Date()
   }
-   ngOnInit(){
+  constructor() {
 
-   }
+  }
+  ngOnInit() {
+
+  }
 }
