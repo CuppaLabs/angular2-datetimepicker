@@ -46,7 +46,8 @@ export class AppComponent implements OnInit {
 		bigBanner: true,
 		timePicker: false,
 		format: 'dd-MM-yyyy',
-		defaultOpen: true
+    defaultOpen: true,
+    minDate: new Date()
 	}
 	constructor(){}
     ngOnInit(){
@@ -56,7 +57,8 @@ export class AppComponent implements OnInit {
 
 ```
 
-Add the following component tag in the template where your want to place the datepicker
+Add the following component tag in the template where your want to place the datepicker.<br>
+Min Date is optional.
 
 ```html
 
