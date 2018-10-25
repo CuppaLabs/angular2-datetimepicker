@@ -380,21 +380,18 @@ export class DatePicker implements OnInit, ControlValueAccessor {
   incHour() {
     if (this.hourValue < 12) {
       this.hourValue += 1;
-      console.log(this.hourValue);
     }
     this.changeInputHour();
   }
   decHour() {
     if (this.hourValue > 1) {
       this.hourValue -= 1;
-      console.log(this.hourValue);
     }
     this.changeInputHour();
   }
   incMinutes() {
     if (this.minValue < 59) {
       this.minValue += 1;
-      console.log(this.minValue);
     }
     this.changeInputMinute();
   }
@@ -463,7 +460,9 @@ export class DatePicker implements OnInit, ControlValueAccessor {
 
   isBackDate(day) {
     const { minDate } = this.settings;
-    return (new Date(day.date) < minDate) ? true : false;
+    const minDateMoment = moment(minDate);
+    const lowerLimitDate = moment(day.date);
+    return (minDateMoment.diff(lowerLimitDate, "days") > 0) ? true : false;
   }
 
   isBackYear(year) {
@@ -517,7 +516,6 @@ export class DatePicker implements OnInit, ControlValueAccessor {
   setCurrectTime(meridianValue?: string) {
     this.hourValue = +moment(new Date()).format("hh");
     this.minValue = +moment(new Date()).format("mm");
-    if (!meridianValue) meridianValue = this.timeViewMeridian;
-    this.timeViewMeridian = meridianValue == 'AM' ? 'PM' : 'AM'
+    if (meridianValue) this.timeViewMeridian = meridianValue == 'AM' ? 'PM' : 'AM'
   }
 }
