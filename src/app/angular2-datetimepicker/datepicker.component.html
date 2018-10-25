@@ -89,7 +89,7 @@
             <div class="time-divider">:</div>
             <div class="minutes">
                 <span class="fa fa-plus inc-btn" (click)="incMinutes()"></span>
-                <input type="number" value="{{minValue}}" [(ngModel)]="minValue" />
+                <input type="number" value="{{minValue}}" [(ngModel)]="minValue" (change)="changeInputMinute()"/>
                 <span class="fa fa-minus dec-btn" (click)="decMinutes()"></span>
             </div>
         </div>

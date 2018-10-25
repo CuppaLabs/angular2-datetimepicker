@@ -235,6 +235,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
   }
   toggleMeridian(val: string) {
     this.timeViewMeridian = val;
+    if (this.isBehindFromCurrentTime()) this.setCurrectTime(val);
   }
   setTimeView() {
     if (this.timeViewMeridian == "AM") {
@@ -381,24 +382,28 @@ export class DatePicker implements OnInit, ControlValueAccessor {
       this.hourValue += 1;
       console.log(this.hourValue);
     }
+    this.changeInputHour();
   }
   decHour() {
     if (this.hourValue > 1) {
       this.hourValue -= 1;
       console.log(this.hourValue);
     }
+    this.changeInputHour();
   }
   incMinutes() {
     if (this.minValue < 59) {
       this.minValue += 1;
       console.log(this.minValue);
     }
+    this.changeInputMinute();
   }
   decMinutes() {
     if (this.minValue > 0) {
       this.minValue -= 1;
       console.log(this.minValue);
     }
+    this.changeInputMinute();
   }
   done() {
     console.log('done: ');
@@ -467,7 +472,8 @@ export class DatePicker implements OnInit, ControlValueAccessor {
   }
 
   isBackMonth(month) {
-    const { minDate } = this.settings;
+    let { minDate } = this.settings;
+    minDate = minDate ? minDate : new Date(0);
     const yearSelected = this.date.getFullYear();
     let monthCondition = this.defaultSettings.cal_months_labels_short.indexOf(month) < minDate.getMonth();
     let yearCondition = yearSelected <= minDate.getFullYear();
@@ -490,25 +496,28 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     if (is12HFormat && (this.hourValue > 12 || this.hourValue < 0)) {
       this.hourValue = +moment(new Date()).format("hh");
     }
-
-    //Make date and check is time is passed - set hour to current hour -
-    // get hour , minute and and am pm value
-    //
-    // if (this.hourValue < +moment(new Date()).format("hh")) {
-    //   this.hourValue = +moment(new Date()).format("hh");
-    // }
+    if (this.isBehindFromCurrentTime()) this.setCurrectTime();
   }
 
   changeInputMinute() {
-    let is12HFormat = this.settings.format.slice(-1)  === 'a' ? true : false;
-    if (is12HFormat && (this.hourValue > 12 || this.hourValue < 0)) {
-      this.hourValue = +moment(new Date()).format("hh");
+    if ((this.minValue > 59) || (this.minValue < 0)) {
+      this.minValue = +moment(new Date()).format("mm");
     }
+    if (this.isBehindFromCurrentTime()) this.setCurrectTime();
+  }
 
-    //Make date and check is time is passed - set hour to current hour
-    //
-    // if (this.hourValue < +moment(new Date()).format("hh")) {
-    //   this.hourValue = +moment(new Date()).format("hh");
-    // }
+  isBehindFromCurrentTime() {
+    let dateSelected = moment(this.date).format('DD-MM-YYYY');
+    let selectedMoment = moment(`${dateSelected} ${this.hourValue}: ${this.minValue} ${this.timeViewMeridian}`, 'DD-MM-YYYY hh: mm a')
+    let currMoment = moment(new Date());
+    let behindFromCurrentTime = currMoment.diff(selectedMoment, "seconds");
+    return (behindFromCurrentTime >  0) ? true : false;
+  }
+
+  setCurrectTime(meridianValue?: string) {
+    this.hourValue = +moment(new Date()).format("hh");
+    this.minValue = +moment(new Date()).format("mm");
+    if (!meridianValue) meridianValue = this.timeViewMeridian;
+    this.timeViewMeridian = meridianValue == 'AM' ? 'PM' : 'AM'
   }
 }
