@@ -13,7 +13,8 @@ export class DateTimePickerExample implements OnInit {
     format: 'dd-MM-yyyy hh:mm a',
     defaultOpen: false,
     closeOnSelect: false,
-    minDate: new Date()
+    minDate: new Date(),
+    preserveTimeValue: true
   }
   constructor() {
 

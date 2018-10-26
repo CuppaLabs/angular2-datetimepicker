@@ -1,7 +1,7 @@
 {
-  "name": "angular2-datetimepicker",
-  "version": "1.1.1",
-  "description": "Angular 2 or 4 datetime picker component",
+  "name": "angular2-sh-datetimepicker",
+  "version": "1.1.3",
+  "description": "Angular 2 or 4 datetime picker component.Created by Mr.Pradeep Terli. I don't claim any right on the code.",
   "keywords": [
     "angular2 datepicker",
     "angular2 datetimepicker",
@@ -42,6 +42,7 @@
   },
   "private": false,
   "dependencies": {
+    "@types/tapable": "^0.2.5",
     "font-awesome": "*",
     "moment": "^2.22.2"
   },
@@ -56,6 +57,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@compodoc/compodoc": "^1.0.0-beta.9",
+    "@types/log4js": "0.0.33",
     "@types/jasmine": "^2.5.47",
     "@types/karma": "^0.13.35",
     "@types/node": "^7.0.18",
