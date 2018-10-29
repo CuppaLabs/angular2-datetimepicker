@@ -280,15 +280,24 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         }
       }
       else {
-        const { preserveTimeValue } = this.defaultSettings;
+        const { preserveTimeValue, incrementByMinutes } = this.defaultSettings;
         if (preserveTimeValue) {
-          let selectedMoment = moment(`${this.hourValue}: ${this.minValue} ${this.timeViewMeridian}`, 'hh: mm a')
+          let selectedMoment = moment(`${moment(selectedDay).format('MM DD YYYY')} ${this.hourValue}: ${this.minValue} ${this.timeViewMeridian}`, 'MM DD YYYY hh: mm a');
           let dateToSet = new Date(selectedDay);
           dateToSet.setHours(+selectedMoment.format('HH'));
           dateToSet.setMinutes(+selectedMoment.format('mm'));
           this.date = dateToSet;
         } else {
           this.date = new Date(selectedDay);
+        }
+
+        let selectedMoment = moment(`${moment(selectedDay).format('MM DD YYYY')} ${this.hourValue}: ${this.minValue} ${this.timeViewMeridian}`, 'MM DD YYYY hh: mm a');
+        let diff = selectedMoment.diff(moment(new Date()), 'minutes');
+        if (diff <= 0 ) {
+          let today = new Date();
+          let currentMinutes = today.getMinutes();
+          if (incrementByMinutes) today.setMinutes(currentMinutes + incrementByMinutes);
+          this.date = new Date(today);
         }
 
         this.onChangeCallback(this.date.toString());
