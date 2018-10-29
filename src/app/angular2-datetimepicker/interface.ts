@@ -10,5 +10,6 @@ export interface Settings{
     closeOnSelect?: boolean;
     rangepicker?: boolean;
     minDate?: Date,
+    incrementByMinutes?: number,
     preserveTimeValue?: boolean
 }

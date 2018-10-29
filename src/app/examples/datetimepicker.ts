@@ -14,7 +14,8 @@ export class DateTimePickerExample implements OnInit {
     defaultOpen: false,
     closeOnSelect: false,
     minDate: new Date(),
-    preserveTimeValue: true
+    preserveTimeValue: true,
+    incrementByMinutes: 30
   }
   constructor() {
 
