@@ -306,6 +306,8 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.popover = false;
         this.onDateSelect.emit(this.date);
       }
+
+      this.timeView = true;
     }
   }
   setStartDate(selectedDate: Date) {
