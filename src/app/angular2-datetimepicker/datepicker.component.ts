@@ -48,6 +48,9 @@ export class DatePicker implements OnInit, ControlValueAccessor {
   today: Date = new Date();
   leftDate: Date = new Date();
   rightDate: Date = new Date();
+  arrowSetting = {
+    hideBack: false
+  }
 
   defaultSettings: Settings = {
     defaultOpen: false,
@@ -362,22 +365,32 @@ export class DatePicker implements OnInit, ControlValueAccessor {
   prevMonth(e: any) {
     e.stopPropagation();
     var self = this;
+    let originalDate = this.date;
     if (this.date.getMonth() == 0) {
-      this.date.setMonth(11);
-      this.date.setFullYear(this.date.getFullYear() - 1);
+      originalDate.setMonth(11);
+      originalDate.setFullYear(this.date.getFullYear() - 1);
     } else {
       var prevmonthLength = this.getMonthLength(this.date.getMonth() - 1, this.date.getFullYear());
       var currentDate = this.date.getDate();
       if (currentDate > prevmonthLength) {
-        this.date.setDate(prevmonthLength);
+        originalDate.setDate(prevmonthLength);
       }
-      this.date.setMonth(this.date.getMonth() - 1);
+      originalDate.setMonth(originalDate.getMonth() - 1);
     }
-    this.date = new Date(this.date);
-    this.monthDays = this.generateDays(this.date);
+    //this.date = new Date(this.date);
+    let isBackDate  = this.isBackDate({ date: originalDate });
+    if (!isBackDate) {
+      this.date = new Date(originalDate);
+      this.monthDays = this.generateDays(this.date);
+      //this.arrowSetting.hideBack = false;
+    } else {
+      this.date = new Date();
+      this.monthDays = this.generateDays(this.date);
+      //this.arrowSetting.hideBack = true;
+    }
   }
-  nextMonth(e: any) {
-    e.stopPropagation();
+  nextMonth(e?: any) {
+    if (e) e.stopPropagation();
     var self = this;
     if (this.date.getMonth() == 11) {
       this.date.setMonth(0);
@@ -389,6 +402,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.date.setDate(nextmonthLength);
       }
       this.date.setMonth(this.date.getMonth() + 1);
+      //this.arrowSetting.hideBack = false;
 
     }
     this.date = new Date(this.date);

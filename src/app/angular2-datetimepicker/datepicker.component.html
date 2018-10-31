@@ -26,7 +26,7 @@
 
     </div>
     <div class="wc-details">
-        <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
+        <i [ngClass]="{'changeVisibility': arrowSetting.hideBack == true}" class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
         <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{date | date: 'MMMM'}}
             <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
                                  <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->
