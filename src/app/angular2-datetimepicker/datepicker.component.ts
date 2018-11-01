@@ -65,7 +65,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     cal_months_labels_short: ['JAN', 'FEB', 'MAR', 'APR',
       'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
       'OCT', 'NOV', 'DEC'],
-    closeOnSelect: true,
+    closeOnSelect: false,
     rangepicker: false
   }
   constructor() {
@@ -348,6 +348,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     return (date > this.dateRange.startDate && date < this.dateRange.endDate);
   }
   setYear(evt: any) {
+    evt.stopPropagation();
     var selectedYear = parseInt(evt.target.getAttribute('id'));
     if (isNaN(selectedYear)) return;
     this.date = new Date(this.date.setFullYear(selectedYear));
@@ -378,7 +379,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
       originalDate.setMonth(originalDate.getMonth() - 1);
     }
     //this.date = new Date(this.date);
-    let isBackDate  = this.isBackDate({ date: originalDate });
+    let isBackDate  = this.isBackDateViaMinutes({ date: originalDate });
     if (!isBackDate) {
       this.date = new Date(originalDate);
       this.monthDays = this.generateDays(this.date);
@@ -497,6 +498,14 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     const minDateMoment = moment(minDate);
     const lowerLimitDate = moment(day.date);
     return (minDateMoment.diff(lowerLimitDate, "days") > 0) ? true : false;
+  }
+
+
+  isBackDateViaMinutes(day) {
+    const { minDate } = this.settings;
+    const minDateMoment = moment(minDate);
+    const lowerLimitDate = moment(day.date);
+    return (minDateMoment.diff(lowerLimitDate, "minutes") > 0) ? true : false;
   }
 
   isBackYear(year) {
