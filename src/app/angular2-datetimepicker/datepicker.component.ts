@@ -352,6 +352,9 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     var selectedYear = parseInt(evt.target.getAttribute('id'));
     if (isNaN(selectedYear)) return;
     this.date = new Date(this.date.setFullYear(selectedYear));
+    let isBackDate  = this.isBackDateViaMinutes({ date: this.date });
+    this.date = !isBackDate ? new Date(this.date) : new Date();
+
     this.yearView = !this.yearView;
     this.monthDays = this.generateDays(this.date);
   }
@@ -378,17 +381,9 @@ export class DatePicker implements OnInit, ControlValueAccessor {
       }
       originalDate.setMonth(originalDate.getMonth() - 1);
     }
-    //this.date = new Date(this.date);
     let isBackDate  = this.isBackDateViaMinutes({ date: originalDate });
-    if (!isBackDate) {
-      this.date = new Date(originalDate);
-      this.monthDays = this.generateDays(this.date);
-      //this.arrowSetting.hideBack = false;
-    } else {
-      this.date = new Date();
-      this.monthDays = this.generateDays(this.date);
-      //this.arrowSetting.hideBack = true;
-    }
+    this.date = !isBackDate ? new Date(originalDate) : new Date();
+    this.monthDays = this.generateDays(this.date);
   }
   nextMonth(e?: any) {
     if (e) e.stopPropagation();
