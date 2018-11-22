@@ -15,7 +15,8 @@ export class DateTimePickerExample implements OnInit {
     closeOnSelect: false,
     minDate: new Date(),
     preserveTimeValue: true,
-    incrementByMinutes: 30
+    incrementByMinutes: 30,
+    clockHour: 12,
   }
   constructor() {
 

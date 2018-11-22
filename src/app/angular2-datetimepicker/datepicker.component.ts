@@ -31,6 +31,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
   dateRange: DateRange = new DateRange();
   popover: Boolean = false;
 
+  clickedToChangeYear:boolean = false;
   cal_days_in_month: Array<any> = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   timeViewDate: Date = new Date(this.date);
   hourValue: number = 0;
@@ -201,6 +202,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
 
   }
   generateYearList(param: string) {
+    this.clickedToChangeYear = true;
     var startYear = null;
     var currentYear = null;
     if (param == "next") {
@@ -447,6 +449,10 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     }
   }
   closepopover() {
+    if (this.clickedToChangeYear) {
+      this.clickedToChangeYear = false;
+      return;
+    }
     this.rangeSelected = 0;
     this.popover = false;
   }
@@ -529,13 +535,10 @@ export class DatePicker implements OnInit, ControlValueAccessor {
 
 
   changeInputHour() {
-    console.log(this.hourValue);
-    if (this.hourValue < 0) this.setCurrectTime();
-    // let is12HFormat = this.settings.format.slice(-1)  === 'a' ? true : false;
-    // if (is12HFormat && (this.hourValue > 12 || this.hourValue < 0)) {
-    //   this.hourValue = +moment(new Date()).format("hh");
-    // }
-    // if (this.isBehindFromCurrentTime()) this.setCurrectTime();
+    const { clockHour } = this.settings;
+    if (this.hourValue < 0) return this.setCurrectTime();
+    let is12HFormat = clockHour  === 12 ? true : false;
+    if (is12HFormat && (this.hourValue > 12)) this.setCurrectTime();
   }
 
   changeInputMinute() {

@@ -11,5 +11,6 @@ export interface Settings{
     rangepicker?: boolean;
     minDate?: Date,
     incrementByMinutes?: number,
-    preserveTimeValue?: boolean
+    preserveTimeValue?: boolean,
+    clockHour?: Number
 }
