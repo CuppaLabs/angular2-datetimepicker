@@ -10,7 +10,7 @@ body{
 	box-sizing: border-box;
 }
 #cuppaDatePickerContainer, #cuppaDatePicker{
-	width: 250px;
+	  width: 250px;
     text-align: center;
     margin: 0px auto;
     font-family: 'Roboto','Arial',sans-serif;
@@ -580,7 +580,7 @@ body{
 }
 @media (min-width: 768px) {
     .wc-date-popover{
-        width: 250px;
+        width: 250px !important;
         position: absolute;
         top: 31px;
         height: auto;

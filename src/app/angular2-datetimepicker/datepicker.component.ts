@@ -313,6 +313,10 @@ export class DatePicker implements OnInit, ControlValueAccessor {
       }
 
       this.timeView = true;
+
+      this.hourValue = +moment(this.date).format("hh");
+      this.minValue = +moment(this.date).format("mm");
+      this.timeViewMeridian = moment(this.date).format("A");
     }
   }
   setStartDate(selectedDate: Date) {
@@ -507,6 +511,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     const minDateMoment = moment(minDate);
     const lowerLimitDate = moment(day.date);
     return (minDateMoment.diff(lowerLimitDate, "minutes") > 0) ? true : false;
+    
   }
 
   isBackYear(year) {
@@ -539,6 +544,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     if (this.hourValue < 0) return this.setCurrectTime();
     let is12HFormat = clockHour  === 12 ? true : false;
     if (is12HFormat && (this.hourValue > 12)) this.setCurrectTime();
+    if (this.isBehindFromCurrentTime()) this.setCurrectTime();
   }
 
   changeInputMinute() {
