@@ -9,4 +9,8 @@ export interface Settings{
     cal_months_labels_short: Array<string>;
     closeOnSelect?: boolean;
     rangepicker?: boolean;
+    minDate?: Date,
+    incrementByMinutes?: number,
+    preserveTimeValue?: boolean,
+    clockHour?: Number
 }

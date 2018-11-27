@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
 
-$base-color: #1565c0;
+$base-color: #e52463;
 $secondary-color: #ffffff;
 
 body{
@@ -10,13 +10,14 @@ body{
 	box-sizing: border-box;
 }
 #cuppaDatePickerContainer, #cuppaDatePicker{
-	width: 250px;
+	  width: 250px;
     text-align: center;
     margin: 0px auto;
     font-family: 'Roboto','Arial',sans-serif;
 }
 .year-dropdown{
     text-align: center;
+    cursor: pointer;
 }
 .calendar-header{
     color: #333;
@@ -366,7 +367,7 @@ body{
 }
 .calendar-day:hover > span{
 	background: $base-color;
-    color: #fff;
+  color: #fff;
 }
 .winkel-calendar table{
 	width: 100%;
@@ -579,7 +580,7 @@ body{
 }
 @media (min-width: 768px) {
     .wc-date-popover{
-        width: 250px;
+        width: 250px !important;
         position: absolute;
         top: 31px;
         height: auto;
@@ -783,4 +784,14 @@ input[type=number]::-webkit-outer-spin-button {
 .util-list li a:hover{
     color: #14569d;
     text-decoration: underline;
+}
+
+.disable-date {
+  color: #8e8d8d;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.changeVisibility {
+  visibility: hidden;
 }
