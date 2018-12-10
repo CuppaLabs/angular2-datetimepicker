@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
 
-$base-color: #1565c0;
+$base-color: #e52463;
 $secondary-color: #ffffff;
 
 body{
@@ -17,6 +17,7 @@ body{
 }
 .year-dropdown{
     text-align: center;
+    cursor: pointer;
 }
 .calendar-header{
     color: #333;
@@ -366,7 +367,7 @@ body{
 }
 .calendar-day:hover > span{
 	background: $base-color;
-    color: #fff;
+  color: #fff;
 }
 .winkel-calendar table{
 	width: 100%;
@@ -783,4 +784,14 @@ input[type=number]::-webkit-outer-spin-button {
 .util-list li a:hover{
     color: #14569d;
     text-decoration: underline;
+}
+
+.disable-date {
+  color: #8e8d8d;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.changeVisibility {
+  visibility: hidden;
 }

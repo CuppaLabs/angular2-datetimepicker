@@ -36,27 +36,29 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 ```
 Declare the component data variables and options in your component where you want to consume the dropdown component.
 
-```js 
+```js
 import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
-    
+
 	date: Date = new Date();
 	settings = {
-		bigBanner: true,
-		timePicker: false,
-		format: 'dd-MM-yyyy',
-		defaultOpen: true
+	  bigBanner: true,
+          timePicker: false,
+	  format: 'dd-MM-yyyy',
+          defaultOpen: true,
+          minDate: new Date()
 	}
 	constructor(){}
     ngOnInit(){
-       
+
     }
 }
 
 ```
 
-Add the following component tag in the template where your want to place the datepicker
+Add the following component tag in the template where your want to place the datepicker.<br>
+Min Date is optional.
 
 ```html
 
@@ -76,6 +78,10 @@ Following `settings` object properties can be used to configure the component.
 |defaultOpen|Boolean|false|To open the datepicker popover on load. Default is set to false.|
 |timePicker|Boolean|false|Enable time picker feature.|
 |closeOnSelect|Boolean|true|to close the popover on date select or on click of done button.|
+|minDate|Date|new Date() |Pass minimum date beyond which all date will be disabale|
+|preserveTimeValue|boolean| false |Time will not become 00:00 on selection of new date|
+|incrementByMinutes|number|0 |Increment initial time by n minutes|
+
 
 
 ## Callback Methods
@@ -150,3 +156,8 @@ Thanks to Font Awesome and Moment.js for the libraries.
 
 ## Author
 Pradeep Kumar Terli
+
+## Release Info
+### 1.1.7
+-----
+New feature included opening of time window every time date is selected.

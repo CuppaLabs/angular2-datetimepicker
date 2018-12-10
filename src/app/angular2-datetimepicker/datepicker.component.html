@@ -26,7 +26,7 @@
 
     </div>
     <div class="wc-details">
-        <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
+        <i [ngClass]="{'changeVisibility': arrowSetting.hideBack == true}" class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
         <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{date | date: 'MMMM'}}
             <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
                                  <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->
@@ -58,14 +58,24 @@
         </tr>
     </table>
     <div class="months-view" [hidden]="!monthsView" (click)="setMonth($event)">
-        <span *ngFor="let month of settings.cal_months_labels_short" [ngClass]="{'current-month': month == settings.cal_months_labels_short[date?.getMonth()]}"
+        <span *ngFor="let month of settings.cal_months_labels_short"
+          [ngClass]="{
+            'current-month': month == settings.cal_months_labels_short[date?.getMonth()],
+            'disable-date': isBackMonth(month)
+          }"
             id="{{month}}">{{month}}</span>
     </div>
     <div class="years-view" *ngIf="yearView">
         <div class="fa fa-angle-left prev" (click)="generateYearList('prev')"></div>
         <div class="fa fa-angle-right next" (click)="generateYearList('next')"></div>
         <div class="years-list-view" (click)="setYear($event)">
-            <span *ngFor="let year of yearsList" [ngClass]="{'current-year': year == date?.getFullYear()}" id="{{year}}">{{year}}</span>
+            <span
+              *ngFor="let year of yearsList"
+              [ngClass]="{
+                'current-year': year == date?.getFullYear(),
+                'disable-date': isBackYear(year)
+              }"
+              id="{{year}}">{{year}}</span>
         </div>
     </div>
     <div class="time-view" [hidden]="!timeView">
@@ -73,13 +83,13 @@
         <div class="time">
             <div class="hour">
                 <span class="fa fa-plus inc-btn" (click)="incHour()"></span>
-                <input type="number" value="{{hourValue}}" [(ngModel)]="hourValue" autofocus/>
+                <input type="number" value="{{hourValue}}" [(ngModel)]="hourValue" autofocus (change)="changeInputHour()"/>
                 <span class="fa fa-minus dec-btn" (click)="decHour()"></span>
             </div>
             <div class="time-divider">:</div>
             <div class="minutes">
                 <span class="fa fa-plus inc-btn" (click)="incMinutes()"></span>
-                <input type="number" value="{{minValue}}" [(ngModel)]="minValue" />
+                <input type="number" value="{{minValue}}" [(ngModel)]="minValue" (change)="changeInputMinute()"/>
                 <span class="fa fa-minus dec-btn" (click)="decMinutes()"></span>
             </div>
         </div>
@@ -95,10 +105,15 @@
     </div>
     <table class="calendar-days" (click)="setDay($event);" [hidden]="monthsView || yearView">
         <tr *ngFor="let week of monthDays">
-            <td [ngClass]="{'calendar-day': day.day != null,'today': day == today.getDate() && date?.getMonth() == today.getMonth() && date?.getFullYear() == today.getFullYear(),'selected-day': day.day == date?.getDate()}"
-                *ngFor="let day of week">
-                <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
-            </td>
+          <td [ngClass]="{
+            'calendar-day': day.day != null,
+            'today': day == today.getDate() && date?.getMonth() == today.getMonth() && date?.getFullYear() == today.getFullYear(),
+            'selected-day': day.day == date?.getDate(),
+            'disable-date': isBackDate(day)
+          }"
+          *ngFor="let day of week">
+          <span [attr.data-label]="composeDate(day.date)">{{day.day}}</span>
+        </td>
 
         </tr>
     </table>
