@@ -76,7 +76,7 @@ Following `settings` object properties can be used to configure the component.
 |defaultOpen|Boolean|false|To open the datepicker popover on load. Default is set to false.|
 |timePicker|Boolean|false|Enable time picker feature.|
 |closeOnSelect|Boolean|true|to close the popover on date select or on click of done button.|
-
+|className|String||Adds a custom class name to the parent element.|
 
 ## Callback Methods
 

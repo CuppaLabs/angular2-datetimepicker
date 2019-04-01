@@ -1,4 +1,4 @@
-<div class="winkel-calendar" (clickOutside)="closepopover()">
+<div [attr.class]="settings.className ? 'winkel-calendar ' + settings.className : 'winkel-calendar'" (clickOutside)="closepopover()">
     <span *ngIf="!settings.rangepicker">
     <input type="hidden" class="wc-input" value="{{date}}">
     <div class="wc-date-container" (click)="popover = !popover">
