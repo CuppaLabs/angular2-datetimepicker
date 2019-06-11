@@ -237,6 +237,18 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         this.timeViewMeridian = val;
     }
     setTimeView() {
+        window.addEventListener('input', (e) => {
+            this.hourValue = Number(this.hourValue);
+            this.minValue = Number(this.minValue);
+            if(this.hourValue > 12) {
+                this.hourValue = 11;
+                this.timeViewMeridian = "PM";
+            }
+
+            if(this.minValue > 59){
+                this.minValue = 59;
+            }
+        });
         if (this.timeViewMeridian == "AM") {
             if (this.hourValue == 12) {
                 this.date.setHours(0);
@@ -251,7 +263,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
                 this.date.setHours(this.hourValue);
             }
             else {
-                this.date.setHours(this.hourValue + 12);
+                this.date.setHours(Number(this.hourValue) + 12);
             }
             this.date.setMinutes(this.minValue);
         }
@@ -283,7 +295,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
 
             }
             if (this.settings.closeOnSelect) {
-                this.popover = false;
+                //this.popover = false;
                 this.onDateSelect.emit(this.date);
             }
         }
