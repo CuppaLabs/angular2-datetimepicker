@@ -397,7 +397,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
         }
     }
     decMinutes() {
-        if (this.minValue > 0) {
+        if (this.minValue > this.settings.addMinute) {
             this.minValue -= this.settings.addMinute;
             console.log(this.minValue);
         }
