@@ -11,7 +11,8 @@ export class DateTimePickerExample implements OnInit {
         bigBanner: true,
         timePicker: true,
         format: 'dd-MM-yyyy hh:mm',
-        defaultOpen: true
+        defaultOpen: true,
+        addMinute:15
     }
   constructor(){
     

@@ -62,13 +62,15 @@ export class DatePicker implements OnInit, ControlValueAccessor {
             'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
             'OCT', 'NOV', 'DEC'],
         closeOnSelect: true,
-        rangepicker: false
+        rangepicker: false,
+        addMinute:1
     }
     constructor() {
 
     }
     ngOnInit() {
         this.settings = Object.assign(this.defaultSettings, this.settings);
+       
         if (this.settings.defaultOpen) {
             this.popover = true;
         }
@@ -76,6 +78,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     private onTouchedCallback: () => {};
     private onChangeCallback: (_: any) => {};
     writeValue(value: any) {
+       
         if (value !== undefined && value !== null) {
             if (!this.settings.rangepicker) {
                 this.initDate(value);
@@ -99,7 +102,7 @@ export class DatePicker implements OnInit, ControlValueAccessor {
                     this.toMonthDays = this.generateDays(this.rightDate);
                 }
 
-                console.log(this.monthDays);
+               
             }
 
         }
@@ -389,13 +392,13 @@ export class DatePicker implements OnInit, ControlValueAccessor {
     }
     incMinutes() {
         if (this.minValue < 59) {
-            this.minValue += 1;
+            this.minValue +=this.settings.addMinute;
             console.log(this.minValue);
         }
     }
     decMinutes() {
-        if (this.minValue > 0) {
-            this.minValue -= 1;
+        if (this.minValue > this.settings.addMinute) {
+            this.minValue -= this.settings.addMinute;
             console.log(this.minValue);
         }
     }
