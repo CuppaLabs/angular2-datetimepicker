@@ -48,13 +48,7 @@
     </div>
     <table class="calendar-header" [hidden]="yearView == true || monthsView == true">
         <tr>
-            <td class="calendar-header-day">Su</td>
-            <td class="calendar-header-day">Mo</td>
-            <td class="calendar-header-day">Tu</td>
-            <td class="calendar-header-day">We</td>
-            <td class="calendar-header-day">Th</td>
-            <td class="calendar-header-day">Fr</td>
-            <td class="calendar-header-day">Sa</td>
+          <td *ngFor="let day of settings.cal_days_labels">{{day}}</td>
         </tr>
     </table>
     <div class="months-view" [hidden]="!monthsView" (click)="setMonth($event)">
@@ -316,6 +310,7 @@
             </tr>
         </table>
     </div>
+
     <div class="cal-util">
         <ul class="util-list">
             <li><a>Last week</a></li>
