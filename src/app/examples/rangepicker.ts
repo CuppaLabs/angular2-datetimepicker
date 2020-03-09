@@ -4,7 +4,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
   templateUrl: './views/rangepicker.html'
 })
 export class DateRangePickerExample implements OnInit {
-  date: any = {startDate: new Date('04-18-1990'), endDate: new Date('10-20-2017')};
+  date: any = {startDate: new Date('04-18-1990'), endDate: new Date('04-20-2017')};
   settings = {
     bigBanner: true,
     timePicker: false,

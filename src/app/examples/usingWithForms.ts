@@ -10,9 +10,9 @@ export class UsingWithFormExample implements OnInit {
         dob:  new Date(),
     };
     dobSettings = {
-        bigBanner: true,
-        timePicker: false,
-        format: 'dd-MM-yyyy',
+        bigBanner: false,
+        timePicker: true,
+        format: 'dd-MM-yyyy hh:mm',
         defaultOpen: true,
         closeOnSelect: true,
         rangepicker: false

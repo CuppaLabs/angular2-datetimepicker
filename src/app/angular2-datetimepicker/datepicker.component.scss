@@ -200,6 +200,7 @@ body{
     margin: 0px auto;
     border: 1px solid $base-color;
     border-radius: 3px;
+    cursor: pointer;
 }
 .button-sm{
     width: 50%;
@@ -309,20 +310,20 @@ body{
 .cal-util{
     width: 100%;
     float: left;
-    cursor: pointer;
     position: absolute;
     bottom: 0;
     background: #fff;
+    border-top: 1px solid #f2f2f2;
 }
 .cal-util > .ok{
     width: 100%;
-    padding: 15px;
-    border-bottom: 1px solid #d1d1d1;
+    padding: 5px;
     float: left;
     color: $base-color;
     font-size: 18px;
     border-top: 1px solid #d1d1d1;
     text-align: center;
+    cursor: pointer;
 }
 .ok > i{
     margin-right: 5px;
@@ -336,6 +337,16 @@ body{
 }
 .cal-util > .ok:hover, .cal-util > .cancel:hover{
     box-shadow: inset 0px 0px 20px #ccc;
+}
+.range-date-popover .cal-util{
+    padding: 10px;
+}
+.range-date-popover .cal-util .btn-xs{
+    float: right;
+}
+.btn-xs {
+    padding: 5px 10px;
+    width: auto;
 }
 .today > span{
 	border: 1px solid $base-color;
@@ -647,6 +658,7 @@ body{
     }
     .wc-time-sec > .time{
         font-size: 0.35em;
+        cursor: pointer;
     }
     .time i{
         font-size: 10px;
@@ -742,5 +754,33 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 .range-highlight {
-    background: #ccc;
+    background: #f2f2f2;
+}
+.clock-icon {
+    text-align: center;
+    color: $base-color;
+}
+.time-close{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+.util-list {
+    list-style: none;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+.util-list li {
+    float: left;
+    padding: 5px;
+}
+.util-list li a{
+    color: #007bff;
+    cursor: pointer;
+}
+.util-list li a:hover{
+    color: #14569d;
+    text-decoration: underline;
 }

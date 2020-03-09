@@ -18,7 +18,7 @@
                 <div>{{date | date: 'yyyy'}}</div>
             </div>
         </div>
-        <div class="wc-time-sec ng-scope" ng-click="toggleTimeView()">
+        <div class="wc-time-sec ng-scope">
             <div *ngIf="settings.timePicker" class="time" (click)="timeView = !timeView">
                 {{date | date: 'hh'}} : {{date | date: 'mm'}} {{date | date: 'a'}} <span class="fa fa-clock-o"></span>
             </div>
@@ -63,6 +63,7 @@
         </div>
     </div>
     <div class="time-view" [hidden]="!timeView">
+        <i class="fa fa-close time-close" (click)="timeView = false"></i>
         <div class="time">
             <div class="hour">
                 <span class="fa fa-plus inc-btn" (click)="incHour()"></span>
@@ -96,6 +97,9 @@
         </tr>
     </table>
     <div class="cal-util">
+        <div class="clock-icon" *ngIf="!settings.bigBanner">
+            <i class="fa fa-clock-o" aria-hidden="true" (click)="timeView = !timeView"></i>
+        </div>
         <div class="ok" (click)="done()"><i class="fa fa-check"></i>Done
         </div>
     </div>
@@ -152,12 +156,12 @@
     <div class="dp-left-section">
         <div class="wc-details">
             <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
-            <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{dateRange.startDate | date: 'MMMM'}}
+            <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{leftDate | date: 'MMMM'}}
                 <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
                                  <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->
             </div>
             <div class="month-year" *ngIf="!settings.bigBanner" (click)="toggleMonthView()">
-                {{dateRange.startDate | date: 'MMMM'}}
+                {{leftDate | date: 'MMMM'}}
                 <!--    <i ng-show="!monthsView" class="fa fa-arrow-down" (click)="toggleMonthView()"></i>
                                     <i ng-show="monthsView" class="fa fa-arrow-up" (click)="toggleMonthView()"></i>  -->
 
@@ -166,7 +170,7 @@
         </div>
         <div class="year-title">
             <div class="year-dropdown" (click)="generateYearList('current')">
-                {{dateRange.startDate | date: 'yyyy'}}
+                {{leftDate | date: 'yyyy'}}
                 <i *ngIf="!yearView" class="fa fa-angle-down"></i>
                 <i *ngIf="yearView" class="fa fa-angle-up"></i>
             </div>
@@ -209,12 +213,12 @@
             </div>
             <div class="meridian">
                 <div class="cuppa-btn-group">
-                    <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
-                    <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
+                    <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" type="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
+                    <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" type="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
                 </div>
             </div>
             <div class="time-view-btn">
-                <button class="button" (click)="setTimeView()">Set Time</button>
+                <button class="button" type="button" (click)="setTimeView()">Set Time</button>
             </div>
         </div>
         <table class="calendar-days" (click)="setDay($event,'range');" [hidden]="monthsView || yearView">
@@ -226,21 +230,17 @@
 
             </tr>
         </table>
-        <div class="cal-util">
-            <div class="ok" (click)="done()"><i class="fa fa-check"></i>Done
-            </div>
-        </div>
     </div>
 
     <div class="dp-right-section">
         <div class="wc-details">
             <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
-            <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{dateRange.endDate | date: 'MMMM'}}
+            <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{rightDate | date: 'MMMM'}}
                 <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
                                  <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->
             </div>
             <div class="month-year" *ngIf="!settings.bigBanner" (click)="toggleMonthView()">
-                {{dateRange.endDate | date: 'MMMM'}}
+                {{rightDate | date: 'MMMM'}}
                 <!--    <i ng-show="!monthsView" class="fa fa-arrow-down" (click)="toggleMonthView()"></i>
                                     <i ng-show="monthsView" class="fa fa-arrow-up" (click)="toggleMonthView()"></i>  -->
 
@@ -249,7 +249,7 @@
         </div>
         <div class="year-title">
             <div class="year-dropdown" (click)="generateYearList('current')">
-                {{date | date: 'yyyy'}}
+                {{rightDate | date: 'yyyy'}}
                 <i *ngIf="!yearView" class="fa fa-angle-down"></i>
                 <i *ngIf="yearView" class="fa fa-angle-up"></i>
             </div>
@@ -292,8 +292,8 @@
             </div>
             <div class="meridian">
                 <div class="cuppa-btn-group">
-                    <button [ngClass]="{'active': timeViewMeridian == 'AM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
-                    <button [ngClass]="{'active': timeViewMeridian == 'PM'}" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
+                    <button [ngClass]="{'active': timeViewMeridian == 'AM'}" type="button" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('AM')">AM</button>
+                    <button [ngClass]="{'active': timeViewMeridian == 'PM'}" type="button" class="button" ng-model="timeViewMeridian" (click)="toggleMeridian('PM')">PM</button>
                 </div>
             </div>
             <div class="time-view-btn">
@@ -309,9 +309,14 @@
 
             </tr>
         </table>
-        <div class="cal-util">
-            <div class="ok" (click)="done()"><i class="fa fa-check"></i>Done
-            </div>
-        </div>
+    </div>
+
+    <div class="cal-util">
+        <ul class="util-list">
+            <li><a>Last week</a></li>
+            <li><a (click)="getCurrentWeek()">Current week</a></li>
+            <li><a>Next week</a></li>
+        </ul>
+        <button class="button btn-xs" type="button" (click)="done()"><i class="fa fa-check"></i>Done</button>
     </div>
 </div>
